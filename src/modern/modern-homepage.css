@@ -338,6 +338,41 @@ a:hover {
     padding: var(--spacing-xs);
 }
 
+/* Homepage Main Navigation */
+.main-nav {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-lg);
+}
+
+.main-nav .nav-link {
+    color: var(--text-secondary);
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.main-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    right: 0;
+    height: 2px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+}
+
+.main-nav .nav-link:hover {
+    color: var(--color-primary);
+}
+
+.main-nav .nav-link:hover::after {
+    transform: scaleX(1);
+}
+
 .dashboard-header .mobile-menu-toggle {
     display: none;
 }
@@ -1452,6 +1487,10 @@ a:hover {
    Responsive Design
    =================================== */
 @media (max-width: 1024px) {
+    .main-nav {
+        gap: var(--spacing-md);
+    }
+
     .hero-content {
         grid-template-columns: 1fr;
         gap: var(--spacing-2xl);
