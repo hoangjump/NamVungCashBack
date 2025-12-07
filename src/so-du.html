@@ -6,50 +6,45 @@
     <title>Số Dư - NamVung CashBack</title>
     <meta name="description" content="Quản lý số dư và rút tiền trên NamVung CashBack">
     <link rel="icon" href="favicon.ico" type="image/x-icon">
-    <link rel="stylesheet" href="./styles.css">
-    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="./modern/modern-theme.css">
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
 </head>
-<body class="dashboard-page logged-in">
-    <!-- Dashboard Header -->
-    <header class="header dashboard-header">
+<body>
+    <header class="header">
         <div class="container">
-            <div class="header-content">
-                <a href="./index.html" class="logo">
-                    <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack" width="160" height="45">
-                </a>
+            <a href="./index.html" class="logo">
+                <img src="img/logo.png" alt="NamVung CashBack">
+            </a>
 
-                <nav class="dashboard-nav-inline">
-                    <ul>
-                        <li><a href="./tong-quan.html" class="nav-link">Tổng Quan</a></li>
-                        <li><a href="./don-hang.html" class="nav-link">Đơn Hàng</a></li>
-                        <li><a href="./san-pham.html" class="nav-link">Sản Phẩm</a></li>
-                        <li><a href="./so-du.html" class="nav-link active">Số Dư</a></li>
-                        <li><a href="./ho-so.html" class="nav-link">Hồ Sơ</a></li>
-                        <li><a href="./tai-khoan.html" class="nav-link">Tài Khoản</a></li>
-                    </ul>
-                </nav>
+            <nav class="nav-menu">
+                <a href="./tong-quan.html" class="nav-link"><i class="fas fa-home"></i> Tổng Quan</a>
+                <a href="./don-hang.html" class="nav-link"><i class="fas fa-box"></i> Đơn Hàng</a>
+                <a href="./san-pham.html" class="nav-link"><i class="fas fa-shopping-bag"></i> Sản Phẩm</a>
+                <a href="./so-du.html" class="nav-link active"><i class="fas fa-wallet"></i> Số Dư</a>
+                <a href="./ho-so.html" class="nav-link"><i class="fas fa-user"></i> Hồ Sơ</a>
+                <a href="./tai-khoan.html" class="nav-link"><i class="fas fa-cog"></i> Tài Khoản</a>
+            </nav>
 
-                <div class="user-info-inline">
-                    <img src="https://i.ibb.co/3p5D6kZ/default-avatar.png" alt="User" class="user-avatar-small">
-                    <span class="user-name-small">Nguyễn Văn A</span>
-                    <span class="user-balance">2.150.000đ</span>
-                    <a href="#" onclick="handleLogout()" class="logout-link">
-                        <i class="fas fa-sign-out-alt"></i>
-                    </a>
+            <div class="user-info" onclick="window.location.href='./ho-so.html'">
+                <img src="img/user-avatar.jpg" alt="User" class="user-avatar">
+                <div>
+                    <div class="user-name">Nguyễn Văn A</div>
+                    <div class="user-balance">2.150.000đ</div>
                 </div>
-
-                <button class="mobile-menu-toggle">
-                    <i class="fas fa-bars"></i>
-                </button>
+                <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--text-muted);"></i>
             </div>
+
+            <a href="#" class="logout-link" onclick="logout()">
+                <i class="fas fa-sign-out-alt"></i>
+            </a>
         </div>
     </header>
 
     <!-- Main Content -->
-    <main class="dashboard-main">
+    <main class="main-container">
         <div class="container">
-            <h1 class="section-title">Số Dư</h1>
+            <h1 class="page-title">Số Dư</h1>
 
             <!-- Balance Overview Cards -->
             <div class="wallet-cards">
