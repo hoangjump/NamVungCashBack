@@ -483,47 +483,52 @@
     </div><!-- End Homepage Content -->
 
     <!-- Dashboard Content - Hidden by default -->
-    <main class="main-container" id="dashboard-content" style="display: none;">
+    <main id="dashboard-content" style="display: none;">
         <!-- Dashboard Header -->
-        <header class="header">
+        <header class="header dashboard-header">
             <div class="container">
-                <a href="./index.html" class="logo">
+                <a href="./index.html" class="logo" onclick="logout(); return false;">
                     <img src="img/logo.png" alt="NamVung CashBack">
                 </a>
 
                 <nav class="nav-menu">
-                    <a href="#tong-quan" class="nav-link" onclick="showSection('tong-quan')">
-                        <i class="fas fa-home"></i> Tổng Quan
+                    <a href="#tong-quan" class="nav-link active" onclick="showSection('tong-quan')">
+                        <i class="fas fa-home"></i> <span>Tổng Quan</span>
                     </a>
                     <a href="#don-hang" class="nav-link" onclick="showSection('don-hang')">
-                        <i class="fas fa-box"></i> Đơn Hàng
+                        <i class="fas fa-box"></i> <span>Đơn Hàng</span>
                     </a>
                     <a href="#san-pham" class="nav-link" onclick="showSection('san-pham')">
-                        <i class="fas fa-shopping-bag"></i> Sản Phẩm
+                        <i class="fas fa-shopping-bag"></i> <span>Sản Phẩm</span>
                     </a>
                     <a href="#so-du" class="nav-link" onclick="showSection('so-du')">
-                        <i class="fas fa-wallet"></i> Số Dư
+                        <i class="fas fa-wallet"></i> <span>Số Dư</span>
                     </a>
                     <a href="#ho-so" class="nav-link" onclick="showSection('ho-so')">
-                        <i class="fas fa-user"></i> Hồ Sơ
+                        <i class="fas fa-user"></i> <span>Hồ Sơ</span>
                     </a>
                     <a href="#tai-khoan" class="nav-link" onclick="showSection('tai-khoan')">
-                        <i class="fas fa-cog"></i> Tài Khoản
+                        <i class="fas fa-cog"></i> <span>Tài Khoản</span>
                     </a>
                 </nav>
 
-                <div class="user-info" onclick="window.location.href='#ho-so'">
-                    <img src="img/user-avatar.jpg" alt="User" class="user-avatar">
-                    <div>
-                        <div class="user-name">Nguyễn Văn A</div>
-                        <div class="user-balance">2.150.000đ</div>
-                    </div>
-                    <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--text-muted);"></i>
-                </div>
+                <button class="mobile-menu-toggle" onclick="toggleMobileMenu()">
+                    <i class="fas fa-bars"></i>
+                </button>
 
-                <a href="#" class="logout-link" onclick="logout()">
-                    <i class="fas fa-sign-out-alt"></i>
-                </a>
+                <div class="header-actions">
+                    <div class="user-info" onclick="showSection('ho-so')">
+                        <img src="https://i.ibb.co/3p5D6kZ/default-avatar.png" alt="User" class="user-avatar">
+                        <div>
+                            <div class="user-name">Nguyễn Văn A</div>
+                            <div class="user-balance">2.150.000đ</div>
+                        </div>
+                        <i class="fas fa-chevron-down" style="font-size: 0.8rem; color: var(--text-muted);"></i>
+                    </div>
+                    <a href="#" class="logout-link" onclick="logout()" title="Đăng xuất">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
             </div>
         </header>
 
@@ -1198,6 +1203,14 @@
             document.body.classList.remove('logged-in');
             localStorage.removeItem('isLoggedIn');
             window.location.reload();
+        }
+
+        // Toggle mobile menu
+        function toggleMobileMenu() {
+            const navMenu = document.querySelector('.dashboard-header .nav-menu');
+            if (navMenu) {
+                navMenu.classList.toggle('mobile-active');
+            }
         }
 
         // Check login status on page load
