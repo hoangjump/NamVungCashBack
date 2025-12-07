@@ -293,7 +293,7 @@ a:hover {
 }
 
 /* ===================================
-   Header Styles for Homepage
+   Header Styles - GoShopBack Inspired
    =================================== */
 .header {
     position: fixed;
@@ -301,67 +301,171 @@ a:hover {
     left: 0;
     right: 0;
     z-index: 1000;
-    background: rgba(255, 255, 255, 0.98);
-    backdrop-filter: blur(12px);
-    -webkit-backdrop-filter: blur(12px);
-    padding: 16px 0;
+    background: white;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
     transition: all var(--transition-base);
-    border-bottom: 1px solid #F3F4F6;
 }
 
 .header.scrolled {
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
-    border-bottom-color: #E5E7EB;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.header-content {
+/* Header Top Row - Logo, Search, Actions */
+.header-top {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: var(--spacing-lg);
+    gap: 24px;
+    padding: 16px 0;
+    border-bottom: 1px solid #F3F4F6;
+}
+
+.logo {
+    flex-shrink: 0;
+}
+
+/* Search Bar - Large Center Search */
+.search-container {
+    flex: 1;
+    max-width: 600px;
+    position: relative;
+}
+
+.search-input {
+    width: 100%;
+    height: 48px;
+    padding: 0 56px 0 20px;
+    border: 2px solid #E5E7EB;
+    border-radius: 24px;
+    font-size: 0.95rem;
+    transition: all var(--transition-base);
+    background: #F9FAFB;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--color-primary);
+    background: white;
+    box-shadow: 0 0 0 4px rgba(124, 58, 237, 0.1);
+}
+
+.search-input::placeholder {
+    color: #9CA3AF;
+}
+
+.search-btn {
+    position: absolute;
+    right: 4px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 40px;
+    height: 40px;
+    border: none;
+    background: var(--gradient-primary);
+    color: white;
+    border-radius: 50%;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+}
+
+.search-btn:hover {
+    transform: translateY(-50%) scale(1.05);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.header-right {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    flex-shrink: 0;
 }
 
 .header-actions {
     display: flex;
     align-items: center;
-    gap: var(--spacing-md);
+    gap: 12px;
     flex-shrink: 0;
+}
+
+/* Header Navigation - Second Row */
+.header-nav {
+    display: flex;
+    align-items: center;
+    gap: 32px;
+    padding: 12px 0;
+}
+
+.nav-categories {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 20px;
+    background: var(--gradient-primary);
+    color: white;
+    border: none;
+    border-radius: 8px;
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: all var(--transition-base);
+}
+
+.nav-categories:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.3);
+}
+
+.nav-categories i {
+    font-size: 0.9rem;
+}
+
+.header-nav .nav-link {
+    color: var(--text-primary);
+    font-weight: 500;
+    font-size: 0.95rem;
+    transition: color var(--transition-fast);
+    position: relative;
+}
+
+.header-nav .nav-link::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: var(--color-primary);
+    transform: scaleX(0);
+    transition: transform var(--transition-base);
+}
+
+.header-nav .nav-link:hover {
+    color: var(--color-primary);
+}
+
+.header-nav .nav-link:hover::after {
+    transform: scaleX(1);
 }
 
 .hotline {
     display: flex;
     align-items: center;
-    gap: 10px;
-    padding: 10px 18px;
-    background: white;
-    border: 1.5px solid #E5E7EB;
-    border-radius: 12px;
-    transition: all var(--transition-base);
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
-}
-
-.hotline:hover {
-    background: var(--bg-secondary);
-    border-color: var(--color-primary);
-    transform: translateY(-1px);
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    gap: 8px;
+    color: var(--text-secondary);
+    font-size: 0.9rem;
+    font-weight: 500;
 }
 
 .hotline i {
     color: var(--color-primary);
-    font-size: 1rem;
+    font-size: 1.1rem;
 }
 
-.hotline a {
+.hotline span {
     color: var(--text-primary);
     font-weight: 600;
-    text-decoration: none;
-    font-size: 0.9rem;
-    transition: color var(--transition-fast);
-}
-
-.hotline:hover a {
-    color: var(--color-primary);
 }
 
 .mobile-menu-toggle {
@@ -594,11 +698,11 @@ a:hover {
    =================================== */
 .hero {
     position: relative;
-    min-height: 90vh;
+    min-height: 85vh;
     display: flex;
     align-items: center;
     justify-content: center;
-    padding: calc(var(--spacing-3xl) + 70px) 0 var(--spacing-3xl);
+    padding: calc(var(--spacing-3xl) + 120px) 0 var(--spacing-3xl);
     overflow: hidden;
     background: linear-gradient(180deg, #FFFFFF 0%, #F9FAFB 100%);
 }
@@ -1066,61 +1170,132 @@ a:hover {
 }
 
 /* ===================================
-   Popular Stores
+   Popular Stores - GoShopBack Style
    =================================== */
 .popular-stores {
     padding: var(--spacing-3xl) 0;
-}
-
-.stores-carousel {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: var(--spacing-lg);
-}
-
-.store-card {
     background: white;
-    border: 1px solid #F3F4F6;
-    border-radius: 20px;
-    padding: 28px;
-    text-align: center;
-    transition: all var(--transition-base);
-    cursor: pointer;
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
 }
 
-.store-card:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
-    border-color: rgba(124, 58, 237, 0.2);
-}
-
-.store-image {
-    height: 80px;
+/* Section Header with See More */
+.section-header-inline {
     display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-bottom: var(--spacing-md);
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: var(--spacing-xl);
 }
 
-.store-image img {
-    max-height: 100%;
-    width: auto;
-    object-fit: contain;
+.section-header-inline h2 {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin-bottom: 8px;
 }
 
-.store-info h3 {
-    font-size: 1.125rem;
-    margin-bottom: var(--spacing-xs);
+.section-header-inline p {
+    font-size: 0.95rem;
+    color: var(--text-secondary);
+    margin-bottom: 0;
 }
 
-.cashback-rate {
+.see-more {
     color: var(--color-primary);
     font-weight: 600;
+    font-size: 0.95rem;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    transition: all var(--transition-fast);
 }
 
-.cashback-rate span {
-    font-size: 1.25rem;
+.see-more:hover {
+    gap: 10px;
+}
+
+.see-more i {
+    font-size: 0.85rem;
+}
+
+/* Horizontal Store Cards Grid */
+.stores-grid-horizontal {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 20px;
+}
+
+/* Store Card - Horizontal Layout */
+.store-card-horizontal {
+    background: white;
+    border: 1px solid #E5E7EB;
+    border-radius: 16px;
+    padding: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    transition: all var(--transition-base);
+    cursor: pointer;
+    position: relative;
+    overflow: hidden;
+}
+
+.store-card-horizontal:hover {
+    border-color: var(--color-primary);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.08);
+    transform: translateY(-4px);
+}
+
+/* Store Badge */
+.store-badge {
+    position: absolute;
+    top: 12px;
+    right: 12px;
+    background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+    color: white;
+    font-size: 0.7rem;
+    font-weight: 700;
+    padding: 4px 8px;
+    border-radius: 6px;
+    text-transform: uppercase;
+    letter-spacing: 0.3px;
+}
+
+/* Store Logo Box */
+.store-logo-box {
+    width: 100%;
+    aspect-ratio: 16/9;
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+/* Store Details */
+.store-details {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+}
+
+.store-name {
+    font-size: 1.1rem;
+    font-weight: 700;
+    color: var(--text-primary);
+    margin: 0;
+}
+
+.store-cashback {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    margin: 0;
+}
+
+.store-cashback strong {
+    color: var(--color-primary);
+    font-weight: 700;
+}
+
+.store-category {
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    margin: 0;
 }
 
 /* ===================================
