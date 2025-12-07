@@ -1,0 +1,486 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng Quan - NamVung CashBack</title>
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-body">
+    <!-- Header -->
+    <header class="header dashboard-header">
+        <div class="container">
+            <div class="header-main">
+                <a href="./index.html" class="logo">
+                    <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack" width="140" height="40">
+                </a>
+
+                <nav class="nav-menu">
+                    <ul>
+                        <li><a href="#" class="nav-link active" data-section="tong-quan">Tổng Quan</a></li>
+                        <li><a href="#" class="nav-link" data-section="don-hang">Đơn Hàng</a></li>
+                        <li><a href="#" class="nav-link" data-section="san-pham">Sản Phẩm</a></li>
+                        <li><a href="#" class="nav-link" data-section="so-du">Số Dư</a></li>
+                        <li><a href="#" class="nav-link" data-section="ho-so">Hồ Sơ</a></li>
+                        <li><a href="#" class="nav-link" data-section="tai-khoan">Tài Khoản</a></li>
+                    </ul>
+                </nav>
+
+                <div class="header-actions">
+                    <button class="btn btn-primary" onclick="handleLogout()">
+                        <i class="fas fa-sign-out-alt"></i>
+                        Đăng xuất
+                    </button>
+                </div>
+
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <!-- Tổng Quan Section -->
+        <section id="tong-quan" class="dashboard-section active">
+            <div class="container">
+                <h1 class="section-title">Tổng Quan</h1>
+
+                <!-- Stats Cards -->
+                <div class="stats-cards-grid">
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Đơn Thành Công</h3>
+                            <p class="stat-number" id="completed-orders">0</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-coins"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Tổng Hoàn Tiền</h3>
+                            <p class="stat-number" id="total-refund">0 ₫</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-wallet"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Số Dư Khả Dụng</h3>
+                            <p class="stat-number" id="available-balance">0 ₫</p>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-icon">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="stat-content">
+                            <h3>Mời Thành Công</h3>
+                            <p class="stat-number" id="pending-orders">0</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Recent Orders -->
+                <div class="recent-orders">
+                    <div class="section-header">
+                        <h2>Đơn Hàng Gần Đây</h2>
+                        <button class="btn btn-outline">
+                            <i class="fas fa-eye"></i>
+                            Xem tất cả
+                        </button>
+                    </div>
+
+                    <div class="orders-table-container">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã Đơn</th>
+                                    <th>Sản Phẩm</th>
+                                    <th>Hoa Hồng</th>
+                                    <th>Trạng Thái</th>
+                                </tr>
+                            </thead>
+                            <tbody id="recent-orders-tbody">
+                                <tr class="empty-state">
+                                    <td colspan="4">
+                                        <div class="empty-content">
+                                            <i class="fas fa-inbox"></i>
+                                            <p>Chưa có đơn hàng nào</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- Rank Progress -->
+                <div class="rank-progress">
+                    <h2>Tiến Độ Rank</h2>
+                    <div class="rank-card">
+                        <div class="rank-current">
+                            <div class="rank-icon" id="rank-icon">
+                                <i class="fas fa-medal"></i>
+                            </div>
+                            <div class="rank-info">
+                                <h3 id="current-rank">ĐỒNG</h3>
+                                <p>Cấp bậc hiện tại</p>
+                            </div>
+                        </div>
+                        <div class="rank-stats">
+                            <div class="stat-item">
+                                <p class="label">Đơn hàng</p>
+                                <p class="value"><span id="order-count">0</span> / 10</p>
+                            </div>
+                            <div class="rank-progress-bar">
+                                <div class="progress-fill" id="rank-progress-fill" style="width: 0%"></div>
+                            </div>
+                            <p class="rank-message">Cố lên! Bạn chỉ còn thiếu <span id="orders-needed">10</span> đơn hàng hoàn thành để lên rank tiếp theo</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Đơn Hàng Section -->
+        <section id="don-hang" class="dashboard-section">
+            <div class="container">
+                <h1 class="section-title">Đơn Hàng</h1>
+
+                <!-- Filters -->
+                <div class="orders-filters">
+                    <div class="filter-group">
+                        <label for="order-status-filter">Trạng thái</label>
+                        <select id="order-status-filter">
+                            <option value="all">Tất cả</option>
+                            <option value="pending">Đang xử lý</option>
+                            <option value="completed">Hoàn thành</option>
+                            <option value="cancelled">Đã hủy</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label for="order-search-input">Tìm kiếm</label>
+                        <input type="text" id="order-search-input" placeholder="Mã đơn hàng...">
+                    </div>
+                    <div class="filter-group">
+                        <button class="btn btn-primary" id="order-search-btn">
+                            <i class="fas fa-search"></i> Tìm kiếm
+                        </button>
+                    </div>
+                </div>
+
+                <!-- Orders Table -->
+                <div class="recent-orders">
+                    <div class="section-header">
+                        <h2>Danh sách đơn hàng</h2>
+                    </div>
+                    <div class="orders-table-container">
+                        <table class="orders-table">
+                            <thead>
+                                <tr>
+                                    <th>Mã đơn hàng</th>
+                                    <th>Cửa hàng</th>
+                                    <th>Số tiền</th>
+                                    <th>Trạng thái</th>
+                                    <th>Ngày tạo</th>
+                                    <th>Thao tác</th>
+                                </tr>
+                            </thead>
+                            <tbody id="orders-tbody">
+                                <tr class="empty-state">
+                                    <td colspan="6">
+                                        <div class="empty-content">
+                                            <i class="fas fa-inbox"></i>
+                                            <p>Đang tải đơn hàng...</p>
+                                        </div>
+                                    </td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div id="orders-pagination" class="orders-pagination"></div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Sản Phẩm Section -->
+        <section id="san-pham" class="dashboard-section">
+            <div class="container">
+                <h1 class="section-title">Sản Phẩm</h1>
+
+                <!-- Products Header -->
+                <div class="products-header">
+                    <div>
+                        <h2>Cửa hàng tiềm năng</h2>
+                        <p>Khám phá các cửa hàng với mức hoàn tiền hấp dẫn</p>
+                    </div>
+                    <div class="filter-group">
+                        <select id="store-category-filter">
+                            <option value="all">Tất cả danh mục</option>
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Stores Grid -->
+                <div id="stores-grid" class="stores-grid">
+                    <div class="empty-state">
+                        <i class="fas fa-store"></i>
+                        <p>Đang tải cửa hàng...</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Số Dư Section -->
+        <section id="so-du" class="dashboard-section">
+            <div class="container">
+                <h1 class="section-title">Số Dư</h1>
+
+                <!-- Wallet Cards -->
+                <div class="wallet-cards">
+                    <div class="wallet-card highlight">
+                        <div class="label">Số dư khả dụng</div>
+                        <div class="value" id="wallet-balance">0 ₫</div>
+                    </div>
+                    <div class="wallet-card">
+                        <div class="label">Đang chờ xử lý</div>
+                        <div class="value" id="wallet-pending">0 ₫</div>
+                    </div>
+                    <div class="wallet-card">
+                        <div class="label">Đã rút</div>
+                        <div class="value" id="wallet-withdrawn">0 ₫</div>
+                    </div>
+                    <div class="wallet-card">
+                        <div class="label">Tổng đã hoàn</div>
+                        <div class="value" id="wallet-total">0 ₫</div>
+                    </div>
+                </div>
+
+                <!-- Withdrawal Form -->
+                <div class="wallet-withdrawal">
+                    <h2>Yêu cầu rút tiền</h2>
+                    <form id="withdrawal-form" class="withdrawal-form">
+                        <div class="form-group">
+                            <label for="withdrawal-amount">Số tiền (₫)</label>
+                            <input type="number" id="withdrawal-amount" name="amount" required min="50000" step="1000">
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawal-bank">Ngân hàng</label>
+                            <select id="withdrawal-bank" name="bankName" required>
+                                <option value="">Chọn ngân hàng</option>
+                                <option value="VCB">Vietcombank</option>
+                                <option value="TCB">Techcombank</option>
+                                <option value="MB">MB Bank</option>
+                                <option value="VAB">Vietcombank</option>
+                                <option value="STB">Sacombank</option>
+                                <option value="ACB">ACB</option>
+                                <option value="OTHER">Khác</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawal-account">Số tài khoản</label>
+                            <input type="text" id="withdrawal-account" name="accountNumber" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="withdrawal-holder">Chủ tài khoản</label>
+                            <input type="text" id="withdrawal-holder" name="accountHolder" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">
+                            <i class="fas fa-paper-plane"></i> Gửi yêu cầu
+                        </button>
+                    </form>
+                </div>
+
+                <!-- Wallet Activity -->
+                <div class="wallet-activity">
+                    <h2>Giao dịch gần đây</h2>
+                    <div id="wallet-transactions">
+                        <div class="empty-state">
+                            <i class="fas fa-exchange-alt"></i>
+                            <p>Đang tải giao dịch...</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Hồ Sơ Section -->
+        <section id="ho-so" class="dashboard-section">
+            <div class="container">
+                <h1 class="section-title">Hồ Sơ</h1>
+
+                <div class="profile-container">
+                    <!-- Profile Sidebar -->
+                    <div class="profile-sidebar">
+                        <img id="profile-avatar" src="https://via.placeholder.com/150?text=Avatar" alt="Avatar" class="profile-avatar">
+                        <h2 id="profile-name" class="profile-name">Đang tải...</h2>
+                        <p id="profile-email" class="profile-email">email@example.com</p>
+                        <span id="profile-rank" class="profile-rank">ĐỒNG</span>
+
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <span class="profile-stat-label">Tổng đơn hàng</span>
+                                <span id="profile-orders" class="profile-stat-value">0</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="profile-stat-label">Tổng hoàn tiền</span>
+                                <span id="profile-cashback" class="profile-stat-value">0 ₫</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="profile-stat-label">Cửa hàng yêu thích</span>
+                                <span id="profile-favorite" class="profile-stat-value">N/A</span>
+                            </div>
+                            <div class="profile-stat">
+                                <span class="profile-stat-label">Thành viên từ</span>
+                                <span id="profile-member-since" class="profile-stat-value">-</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Profile Main -->
+                    <div class="profile-main">
+                        <h2>Cập nhật thông tin</h2>
+                        <form id="profile-form" class="profile-form">
+                            <div class="form-group">
+                                <label for="profile-form-name">Họ và tên</label>
+                                <input type="text" id="profile-form-name" name="name" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-form-email">Email</label>
+                                <input type="email" id="profile-form-email" disabled>
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-form-phone">Số điện thoại</label>
+                                <input type="tel" id="profile-form-phone" name="phone" placeholder="Không bắt buộc">
+                            </div>
+                            <div class="form-group">
+                                <label for="profile-form-avatar">URL Avatar</label>
+                                <input type="url" id="profile-form-avatar" name="avatar" placeholder="https://example.com/avatar.jpg">
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i> Lưu thay đổi
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Tài Khoản Section -->
+        <section id="tai-khoan" class="dashboard-section">
+            <div class="container">
+                <h1 class="section-title">Tài Khoản</h1>
+
+                <div class="account-sections">
+                    <!-- Account Information -->
+                    <div class="account-section">
+                        <h2>Thông tin tài khoản</h2>
+                        <div class="account-info">
+                            <div class="info-item">
+                                <span class="info-label">Email</span>
+                                <span id="account-email" class="info-value">Đang tải...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Họ và tên</span>
+                                <span id="account-name" class="info-value">Đang tải...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Số điện thoại</span>
+                                <span id="account-phone" class="info-value">Đang tải...</span>
+                            </div>
+                            <div class="info-item">
+                                <span class="info-label">Ngày tham gia</span>
+                                <span id="account-created" class="info-value">Đang tải...</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Password Change -->
+                    <div class="account-section">
+                        <h2>Đổi mật khẩu</h2>
+                        <form id="password-form" class="password-form">
+                            <div class="form-group">
+                                <label for="current-password">Mật khẩu hiện tại</label>
+                                <input type="password" id="current-password" name="currentPassword" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="new-password">Mật khẩu mới</label>
+                                <input type="password" id="new-password" name="newPassword" required minlength="6">
+                            </div>
+                            <div class="form-group">
+                                <label for="confirm-password">Xác nhận mật khẩu mới</label>
+                                <input type="password" id="confirm-password" name="confirmPassword" required>
+                            </div>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-key"></i> Đổi mật khẩu
+                            </button>
+                        </form>
+                    </div>
+
+                    <!-- Notification Settings -->
+                    <div class="account-section">
+                        <h2>Cài đặt thông báo</h2>
+                        <div class="notification-settings">
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Email thông báo</h4>
+                                    <p>Nhận thông báo qua email về các giao dịch và khuyến mãi</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-emailNotifications" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Thông báo đẩy</h4>
+                                    <p>Nhận thông báo đẩy trên trình duyệt</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-pushNotifications" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                            <div class="setting-item">
+                                <div class="setting-info">
+                                    <h4>Tin tức & Khuyến mãi</h4>
+                                    <p>Nhận bản tin hàng tuần về các ưu đãi mới</p>
+                                </div>
+                                <label class="switch">
+                                    <input type="checkbox" id="setting-newsletter" checked>
+                                    <span class="slider"></span>
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Danger Zone -->
+                    <div class="account-section">
+                        <div class="danger-zone">
+                            <h3><i class="fas fa-exclamation-triangle"></i> Vùng nguy hiểm</h3>
+                            <p>Hành động này không thể hoàn tác. Vui lòng cân nhắc kỹ.</p>
+                            <button id="delete-account-btn" class="btn btn-danger">
+                                <i class="fas fa-trash-alt"></i> Xóa tài khoản
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

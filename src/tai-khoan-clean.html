@@ -1,0 +1,1039 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cài đặt tài khoản - NamVung CashBack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%);
+            min-height: 100vh;
+            color: #111827;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3B82F6;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-balance {
+            background: #3B82F6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #111827;
+        }
+
+        /* Settings Grid */
+        .settings-grid {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 2rem;
+        }
+
+        /* Settings Sidebar */
+        .settings-sidebar {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            height: fit-content;
+        }
+
+        .settings-menu {
+            list-style: none;
+        }
+
+        .settings-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .settings-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            padding: 0.75rem 1rem;
+            color: #6B7280;
+            text-decoration: none;
+            border-radius: 0.5rem;
+            transition: all 0.2s;
+        }
+
+        .settings-menu a:hover,
+        .settings-menu a.active {
+            background: #EFF6FF;
+            color: #3B82F6;
+        }
+
+        .settings-menu i {
+            width: 20px;
+        }
+
+        /* Settings Content */
+        .settings-content {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .settings-header {
+            background: #F9FAFB;
+            padding: 1.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .settings-header h2 {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .settings-header p {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .settings-body {
+            padding: 2rem;
+        }
+
+        /* Form Styles */
+        .form-section {
+            margin-bottom: 2rem;
+        }
+
+        .form-section:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-section h3 {
+            font-size: 1rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 1rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        .form-input:disabled {
+            background: #F9FAFB;
+            color: #6B7280;
+            cursor: not-allowed;
+        }
+
+        /* Toggle Switch */
+        .toggle-group {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .toggle-group:last-child {
+            border-bottom: none;
+        }
+
+        .toggle-info {
+            flex: 1;
+        }
+
+        .toggle-title {
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .toggle-description {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .toggle-switch {
+            position: relative;
+            width: 48px;
+            height: 24px;
+        }
+
+        .toggle-switch input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+        }
+
+        .toggle-slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: #D1D5DB;
+            transition: 0.2s;
+            border-radius: 24px;
+        }
+
+        .toggle-slider:before {
+            position: absolute;
+            content: "";
+            height: 18px;
+            width: 18px;
+            left: 3px;
+            bottom: 3px;
+            background: white;
+            transition: 0.2s;
+            border-radius: 50%;
+        }
+
+        input:checked + .toggle-slider {
+            background: #3B82F6;
+        }
+
+        input:checked + .toggle-slider:before {
+            transform: translateX(24px);
+        }
+
+        /* Password Strength */
+        .password-strength {
+            margin-top: 0.5rem;
+            height: 4px;
+            background: #E5E7EB;
+            border-radius: 2px;
+            overflow: hidden;
+        }
+
+        .password-strength-bar {
+            height: 100%;
+            transition: all 0.3s;
+            border-radius: 2px;
+        }
+
+        .strength-weak {
+            width: 33%;
+            background: #EF4444;
+        }
+
+        .strength-medium {
+            width: 66%;
+            background: #F59E0B;
+        }
+
+        .strength-strong {
+            width: 100%;
+            background: #10B981;
+        }
+
+        .password-hint {
+            margin-top: 0.5rem;
+            font-size: 0.75rem;
+            color: #6B7280;
+        }
+
+        /* Connected Accounts */
+        .connected-accounts {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .account-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+        }
+
+        .account-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .account-icon {
+            width: 40px;
+            height: 40px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            font-size: 1.25rem;
+        }
+
+        .account-icon.google {
+            background: #FEE2E2;
+            color: #DC2626;
+        }
+
+        .account-icon.facebook {
+            background: #EBF5FF;
+            color: #1877F2;
+        }
+
+        .account-icon.zalo {
+            background: #EDE7FE;
+            color: #7C3AED;
+        }
+
+        .account-details h4 {
+            font-weight: 500;
+            color: #111827;
+        }
+
+        .account-details p {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        /* Danger Zone */
+        .danger-zone {
+            background: #FEF2F2;
+            border: 2px solid #FEE2E2;
+            border-radius: 0.5rem;
+            padding: 1.5rem;
+            margin-top: 2rem;
+        }
+
+        .danger-zone h3 {
+            color: #DC2626;
+            margin-bottom: 1rem;
+        }
+
+        .danger-zone p {
+            color: #7F1D1D;
+            font-size: 0.875rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3B82F6;
+            border: 2px solid #3B82F6;
+        }
+
+        .btn-outline:hover {
+            background: #EFF6FF;
+        }
+
+        .btn-danger {
+            background: #EF4444;
+            color: white;
+        }
+
+        .btn-danger:hover {
+            background: #DC2626;
+        }
+
+        .btn-secondary {
+            background: #F3F4F6;
+            color: #6B7280;
+        }
+
+        .btn-secondary:hover {
+            background: #E5E7EB;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #10B981;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .settings-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .settings-sidebar {
+                order: 2;
+            }
+
+            .settings-content {
+                order: 1;
+            }
+
+            .btn-group {
+                flex-direction: column;
+            }
+
+            .btn-group .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="NamVung CashBack">
+                NamVung CashBack
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="tong-quan.html">Tổng Quan</a></li>
+                    <li><a href="don-hang.html">Đơn Hàng</a></li>
+                    <li><a href="san-pham.html">Sản Phẩm</a></li>
+                    <li><a href="so-du.html">Số Dư</a></li>
+                    <li><a href="ho-so.html">Hồ Sơ</a></li>
+                    <li><a href="tai-khoan.html" class="active">Tài Khoản</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-menu">
+                <span class="user-balance">2.150.000đ</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="section-title">Cài đặt tài khoản</h1>
+
+        <div class="settings-grid">
+            <!-- Settings Sidebar -->
+            <aside class="settings-sidebar">
+                <ul class="settings-menu">
+                    <li>
+                        <a href="#security" class="active" onclick="showSection('security')">
+                            <i class="fas fa-shield-alt"></i>
+                            Bảo mật
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#notifications" onclick="showSection('notifications')">
+                            <i class="fas fa-bell"></i>
+                            Thông báo
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#privacy" onclick="showSection('privacy')">
+                            <i class="fas fa-lock"></i>
+                            Quyền riêng tư
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#connected" onclick="showSection('connected')">
+                            <i class="fas fa-link"></i>
+                            Tài khoản liên kết
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#danger" onclick="showSection('danger')">
+                            <i class="fas fa-exclamation-triangle"></i>
+                            Nguy hiểm
+                        </a>
+                    </li>
+                </ul>
+            </aside>
+
+            <!-- Settings Content -->
+            <div class="settings-content">
+                <!-- Security Section -->
+                <div id="security-section" class="settings-section-content">
+                    <div class="settings-header">
+                        <h2>Bảo mật</h2>
+                        <p>Quản lý cài đặt bảo mật tài khoản của bạn</p>
+                    </div>
+
+                    <div class="settings-body">
+                        <form id="securityForm">
+                            <!-- Change Password -->
+                            <div class="form-section">
+                                <h3>Đổi mật khẩu</h3>
+
+                                <div class="form-group">
+                                    <label class="form-label">Mật khẩu hiện tại</label>
+                                    <input type="password" class="form-input" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Mật khẩu mới</label>
+                                    <input type="password" class="form-input" id="newPassword" required onkeyup="checkPasswordStrength(this.value)">
+                                    <div class="password-strength">
+                                        <div id="strengthBar" class="password-strength-bar"></div>
+                                    </div>
+                                    <p class="password-hint">Mật khẩu phải có ít nhất 8 ký tự, bao gồm chữ hoa, chữ thường và số</p>
+                                </div>
+
+                                <div class="form-group">
+                                    <label class="form-label">Xác nhận mật khẩu mới</label>
+                                    <input type="password" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <!-- Two-Factor Authentication -->
+                            <div class="form-section">
+                                <h3>Xác thực hai yếu tố</h3>
+
+                                <div class="toggle-group">
+                                    <div class="toggle-info">
+                                        <div class="toggle-title">Sử dụng Google Authenticator</div>
+                                        <div class="toggle-description">Thêm lớp bảo vệ bổ sung cho tài khoản</div>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox">
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+
+                                <div class="toggle-group">
+                                    <div class="toggle-info">
+                                        <div class="toggle-title">SMS Verification</div>
+                                        <div class="toggle-description">Nhận mã xác thực qua SMS</div>
+                                    </div>
+                                    <label class="toggle-switch">
+                                        <input type="checkbox" checked>
+                                        <span class="toggle-slider"></span>
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="btn-group">
+                                <button type="button" class="btn btn-secondary">Hủy</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Lưu thay đổi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- Notifications Section (Hidden by default) -->
+                <div id="notifications-section" class="settings-section-content" style="display: none;">
+                    <div class="settings-header">
+                        <h2>Thông báo</h2>
+                        <p>Tùy chỉnh cách bạn nhận thông báo</p>
+                    </div>
+
+                    <div class="settings-body">
+                        <div class="form-section">
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Thông báo email</div>
+                                    <div class="toggle-description">Nhận thông báo qua email về các hoạt động tài khoản</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Thông báo đẩy</div>
+                                    <div class="toggle-description">Nhận thông báo đẩy trên trình duyệt</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Thông báo đơn hàng</div>
+                                    <div class="toggle-description">Cập nhật trạng thái đơn hàng</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Thông báo khuyến mãi</div>
+                                    <div class="toggle-description">Nhận thông tin về các ưu đãi đặc biệt</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" onclick="saveNotifications()">
+                                <i class="fas fa-save"></i>
+                                Lưu cài đặt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Privacy Section (Hidden by default) -->
+                <div id="privacy-section" class="settings-section-content" style="display: none;">
+                    <div class="settings-header">
+                        <h2>Quyền riêng tư</h2>
+                        <p>Kiểm soát quyền riêng tư của bạn</p>
+                    </div>
+
+                    <div class="settings-body">
+                        <div class="form-section">
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Hồ sơ công khai</div>
+                                    <div class="toggle-description">Cho phép người khác xem hồ sơ của bạn</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Hiển thị hoạt động</div>
+                                    <div class="toggle-description">Hiển thị hoạt động mua sắm gần đây</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox">
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Chia sẻ dữ liệu</div>
+                                    <div class="toggle-description">Giúp cải thiện trải nghiệm bằng cách chia sẻ dữ liệu ẩn danh</div>
+                                </div>
+                                <label class="toggle-switch">
+                                    <input type="checkbox" checked>
+                                    <span class="toggle-slider"></span>
+                                </label>
+                            </div>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" onclick="savePrivacy()">
+                                <i class="fas fa-save"></i>
+                                Lưu cài đặt
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Connected Accounts Section (Hidden by default) -->
+                <div id="connected-section" class="settings-section-content" style="display: none;">
+                    <div class="settings-header">
+                        <h2>Tài khoản liên kết</h2>
+                        <p>Quản lý các tài khoản mạng xã hội đã liên kết</p>
+                    </div>
+
+                    <div class="settings-body">
+                        <div class="form-section">
+                            <h3>Tài khoản đã liên kết</h3>
+                            <div class="connected-accounts">
+                                <div class="account-item">
+                                    <div class="account-info">
+                                        <div class="account-icon google">
+                                            <i class="fab fa-google"></i>
+                                        </div>
+                                        <div class="account-details">
+                                            <h4>Google</h4>
+                                            <p>nguyenvana@gmail.com</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">Hủy liên kết</button>
+                                </div>
+
+                                <div class="account-item">
+                                    <div class="account-info">
+                                        <div class="account-icon facebook">
+                                            <i class="fab fa-facebook-f"></i>
+                                        </div>
+                                        <div class="account-details">
+                                            <h4>Facebook</h4>
+                                            <p>Nguyễn Văn A</p>
+                                        </div>
+                                    </div>
+                                    <button class="btn btn-outline btn-sm">Hủy liên kết</button>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="form-section">
+                            <h3>Liên kết tài khoản mới</h3>
+                            <button class="btn btn-outline">
+                                <i class="fab fa-zalo"></i>
+                                Liên kết Zalo
+                            </button>
+                        </div>
+
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-primary" onclick="saveConnectedAccounts()">
+                                <i class="fas fa-save"></i>
+                                Lưu thay đổi
+                            </button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Danger Zone Section (Hidden by default) -->
+                <div id="danger-section" class="settings-section-content" style="display: none;">
+                    <div class="settings-header">
+                        <h2>Cảnh báo nguy hiểm</h2>
+                        <p>Các hành động không thể hoàn tác</p>
+                    </div>
+
+                    <div class="settings-body">
+                        <div class="form-section">
+                            <div class="toggle-group">
+                                <div class="toggle-info">
+                                    <div class="toggle-title">Tạm khóa tài khoản</div>
+                                    <div class="toggle-description">Tạm thời vô hiệu hóa tài khoản của bạn</div>
+                                </div>
+                                <button class="btn btn-outline" onclick="disableAccount()">Tạm khóa</button>
+                            </div>
+                        </div>
+
+                        <div class="danger-zone">
+                            <h3>Xóa tài khoản vĩnh viễn</h3>
+                            <p>Hành động này không thể hoàn tác. Tất cả dữ liệu sẽ bị xóa vĩnh viễn.</p>
+                            <button class="btn btn-danger" onclick="deleteAccount()">
+                                <i class="fas fa-trash"></i>
+                                Xóa tài khoản
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <div>
+            <strong id="toast-title">Thành công!</strong>
+            <div id="toast-message">Thao tác đã được thực hiện</div>
+        </div>
+    </div>
+
+    <script>
+        // Show Section
+        function showSection(section) {
+            // Update menu
+            document.querySelectorAll('.settings-menu a').forEach(link => {
+                link.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Show corresponding section
+            document.querySelectorAll('.settings-section-content').forEach(content => {
+                content.style.display = 'none';
+            });
+            document.getElementById(section + '-section').style.display = 'block';
+        }
+
+        // Password Strength Checker
+        function checkPasswordStrength(password) {
+            const strengthBar = document.getElementById('strengthBar');
+            let strength = 0;
+
+            if (password.length >= 8) strength++;
+            if (password.match(/[a-z]+/)) strength++;
+            if (password.match(/[A-Z]+/)) strength++;
+            if (password.match(/[0-9]+/)) strength++;
+            if (password.match(/[$@#&!]+/)) strength++;
+
+            strengthBar.className = 'password-strength-bar';
+
+            if (strength <= 2) {
+                strengthBar.classList.add('strength-weak');
+            } else if (strength === 3 || strength === 4) {
+                strengthBar.classList.add('strength-medium');
+            } else {
+                strengthBar.classList.add('strength-strong');
+            }
+        }
+
+        // Security Form
+        document.getElementById('securityForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Thành công', 'Cài đặt bảo mật đã được cập nhật');
+        });
+
+        // Save Functions
+        function saveNotifications() {
+            showToast('Thành công', 'Cài đặt thông báo đã được lưu');
+        }
+
+        function savePrivacy() {
+            showToast('Thành công', 'Cài đặt quyền riêng tư đã được lưu');
+        }
+
+        function saveConnectedAccounts() {
+            showToast('Thành công', 'Tài khoản liên kết đã được cập nhật');
+        }
+
+        // Danger Zone Actions
+        function disableAccount() {
+            if (confirm('Bạn có chắc muốn tạm khóa tài khoản? Bạn có thể kích hoạt lại bất cứ lúc nào.')) {
+                showToast('Tạm khóa', 'Tài khoản đã được tạm khóa');
+            }
+        }
+
+        function deleteAccount() {
+            const password = prompt('Nhập mật khẩu để xác nhận xóa tài khoản:');
+            if (password) {
+                if (confirm('CẢNH BÁO: Hành động này không thể hoàn tác! Bạn có chắc chắn?')) {
+                    showToast('Đã xóa', 'Tài khoản của bạn đã bị xóa. Đang chuyển về trang chủ...');
+                    setTimeout(() => {
+                        window.location.href = 'index.html';
+                    }, 2000);
+                }
+            }
+        }
+
+        // Show Toast
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                showToast('Đăng xuất', 'Đang chuyển về trang chủ...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        // Toggle Switches
+        document.querySelectorAll('.toggle-switch input').forEach(toggle => {
+            toggle.addEventListener('change', function() {
+                const title = this.closest('.toggle-group').querySelector('.toggle-title').textContent;
+                const status = this.checked ? 'bật' : 'tắt';
+                showToast('Cài đặt', `${title} đã được ${status}`);
+            });
+        });
+
+        // Unlink Accounts
+        document.querySelectorAll('.account-item .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (confirm('Bạn có chắc muốn hủy liên kết tài khoản này?')) {
+                    this.closest('.account-item').style.opacity = '0.5';
+                    this.textContent = 'Đã hủy liên kết';
+                    this.disabled = true;
+                    showToast('Thành công', 'Đã hủy liên kết tài khoản');
+                }
+            });
+        });
+    </script>
+</body>
+</html>

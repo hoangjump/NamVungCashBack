@@ -1,0 +1,891 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng quan - NamVung CashBack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%);
+            min-height: 100vh;
+            color: #111827;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3B82F6;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-balance {
+            background: #3B82F6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Welcome Section */
+        .welcome-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            display: flex;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        .welcome-icon {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 2rem;
+        }
+
+        .welcome-content h1 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .welcome-text {
+            color: #6B7280;
+            font-size: 1rem;
+        }
+
+        .welcome-stats {
+            margin-left: auto;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .welcome-stat {
+            text-align: center;
+        }
+
+        .welcome-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3B82F6;
+        }
+
+        .welcome-stat-label {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-top: 0.25rem;
+        }
+
+        /* Stats Grid */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 1.5rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .stat-icon {
+            width: 60px;
+            height: 60px;
+            border-radius: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .stat-icon.primary {
+            background: #DBEAFE;
+            color: #3B82F6;
+        }
+
+        .stat-icon.success {
+            background: #D1FAE5;
+            color: #10B981;
+        }
+
+        .stat-icon.warning {
+            background: #FEF3C7;
+            color: #F59E0B;
+        }
+
+        .stat-icon.info {
+            background: #E0E7FF;
+            color: #6366F1;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-bottom: 0.5rem;
+        }
+
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: #111827;
+        }
+
+        .stat-change {
+            font-size: 0.875rem;
+            margin-top: 0.5rem;
+        }
+
+        .stat-change.positive {
+            color: #10B981;
+        }
+
+        .stat-change.negative {
+            color: #EF4444;
+        }
+
+        /* Quick Actions */
+        .quick-actions {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 1.5rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .actions-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .action-card {
+            padding: 1.5rem;
+            background: #F9FAFB;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+            transition: all 0.2s;
+            text-align: center;
+            cursor: pointer;
+        }
+
+        .action-card:hover {
+            background: white;
+            border-color: #3B82F6;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(59, 130, 246, 0.1);
+        }
+
+        .action-icon {
+            width: 48px;
+            height: 48px;
+            background: white;
+            border-radius: 0.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            font-size: 1.25rem;
+            color: #3B82F6;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-title {
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .action-description {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        /* Recent Activity */
+        .recent-activity {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .activity-header {
+            padding: 1.5rem;
+            background: #F9FAFB;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .activity-list {
+            padding: 1.5rem;
+        }
+
+        .activity-item {
+            display: flex;
+            align-items: start;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+            padding-bottom: 0;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            font-size: 1rem;
+        }
+
+        .activity-icon.success {
+            background: #D1FAE5;
+            color: #10B981;
+        }
+
+        .activity-icon.pending {
+            background: #FEF3C7;
+            color: #F59E0B;
+        }
+
+        .activity-icon.info {
+            background: #DBEAFE;
+            color: #3B82F6;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-title {
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-description {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-bottom: 0.25rem;
+        }
+
+        .activity-time {
+            font-size: 0.75rem;
+            color: #9CA3AF;
+        }
+
+        .activity-value {
+            font-weight: 600;
+            color: #111827;
+            text-align: right;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3B82F6;
+            border: 2px solid #3B82F6;
+        }
+
+        .btn-outline:hover {
+            background: #EFF6FF;
+        }
+
+        .btn-sm {
+            padding: 0.5rem 1rem;
+            font-size: 0.75rem;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #10B981;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .welcome-card {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .welcome-stats {
+                margin-left: 0;
+                width: 100%;
+                justify-content: space-around;
+            }
+
+            .stats-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .actions-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .activity-item {
+                flex-direction: column;
+                align-items: start;
+            }
+
+            .activity-value {
+                text-align: left;
+                margin-top: 0.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="NamVung CashBack">
+                NamVung CashBack
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="tong-quan.html" class="active">Tổng Quan</a></li>
+                    <li><a href="don-hang.html">Đơn Hàng</a></li>
+                    <li><a href="san-pham.html">Sản Phẩm</a></li>
+                    <li><a href="so-du.html">Số Dư</a></li>
+                    <li><a href="ho-so.html">Hồ Sơ</a></li>
+                    <li><a href="tai-khoan.html">Tài Khoản</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-menu">
+                <span class="user-balance">2.150.000đ</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Welcome Card -->
+        <div class="welcome-card">
+            <div class="welcome-icon">
+                <i class="fas fa-hand-wave"></i>
+            </div>
+            <div class="welcome-content">
+                <h1>Chào mừng trở lại, Nguyễn Văn A! 👋</h1>
+                <p class="welcome-text">Hôm nay bạn có <strong>3 đơn hàng</strong> đang chờ xác nhận</p>
+            </div>
+            <div class="welcome-stats">
+                <div class="welcome-stat">
+                    <div class="welcome-stat-value">24</div>
+                    <div class="welcome-stat-label">Đơn hàng</div>
+                </div>
+                <div class="welcome-stat">
+                    <div class="welcome-stat-value">2.1M</div>
+                    <div class="welcome-stat-label">Tiền hoàn</div>
+                </div>
+                <div class="welcome-stat">
+                    <div class="welcome-stat-value">15%</div>
+                    <div class="welcome-stat-label">Tiết kiệm</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Stats Grid -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon primary">
+                    <i class="fas fa-shopping-cart"></i>
+                </div>
+                <div class="stat-label">Đơn hàng tháng này</div>
+                <div class="stat-value">12</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 20% so với tháng trước
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon success">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="stat-label">Tiền hoàn nhận được</div>
+                <div class="stat-value">850.000đ</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 15% so với tháng trước
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon warning">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-label">Đang chờ xác nhận</div>
+                <div class="stat-value">3</div>
+                <div class="stat-change negative">
+                    <i class="fas fa-arrow-down"></i> 2 so với hôm qua
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon info">
+                    <i class="fas fa-gift"></i>
+                </div>
+                <div class="stat-label">Điểm thưởng</div>
+                <div class="stat-value">2.450</div>
+                <div class="stat-change positive">
+                    <i class="fas fa-arrow-up"></i> 150 điểm hôm nay
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <div class="section-header">
+                <h2 class="section-title">Thao tác nhanh</h2>
+                <p class="section-description">Các tính năng thường dùng</p>
+            </div>
+
+            <div class="actions-grid">
+                <a href="san-pham.html" class="action-card" onclick="handleQuickAction('Mua sắm')">
+                    <div class="action-icon">
+                        <i class="fas fa-shopping-bag"></i>
+                    </div>
+                    <h3 class="action-title">Mua sắm</h3>
+                    <p class="action-description">Khám phá sản phẩm</p>
+                </a>
+
+                <a href="don-hang.html" class="action-card" onclick="handleQuickAction('Theo dõi đơn hàng')">
+                    <div class="action-icon">
+                        <i class="fas fa-truck"></i>
+                    </div>
+                    <h3 class="action-title">Theo dõi đơn hàng</h3>
+                    <p class="action-description">Xem trạng thái</p>
+                </a>
+
+                <a href="so-du.html" class="action-card" onclick="handleQuickAction('Rút tiền')">
+                    <div class="action-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <h3 class="action-title">Rút tiền</h3>
+                    <p class="action-description">Yêu cầu rút tiền</p>
+                </a>
+
+                <a href="ho-so.html" class="action-card" onclick="handleQuickAction('Cập nhật hồ sơ')">
+                    <div class="action-icon">
+                        <i class="fas fa-user"></i>
+                    </div>
+                    <h3 class="action-title">Cập nhật hồ sơ</h3>
+                    <p class="action-description">Chỉnh sửa thông tin</p>
+                </a>
+            </div>
+        </div>
+
+        <!-- Recent Activity -->
+        <div class="recent-activity">
+            <div class="activity-header">
+                <h2 class="section-title">Hoạt động gần đây</h2>
+                <p class="section-description">Các giao dịch và cập nhật gần đây</p>
+            </div>
+
+            <div class="activity-list">
+                <div class="activity-item">
+                    <div class="activity-icon success">
+                        <i class="fas fa-check"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Đơn hàng #DH001230 đã hoàn thành</div>
+                        <div class="activity-description">Shopee - iPhone 15 Pro</div>
+                        <div class="activity-time">2 giờ trước</div>
+                    </div>
+                    <div class="activity-value">
+                        <div style="color: #10B981;">+150.000đ</div>
+                        <div style="font-size: 0.75rem; color: #9CA3AF;">Tiền hoàn</div>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon pending">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Đơn hàng #DH001233 đang xử lý</div>
+                        <div class="activity-description">Tiki - MacBook Air M2</div>
+                        <div class="activity-time">5 giờ trước</div>
+                    </div>
+                    <div class="activity-value">
+                        <div>27.990.000đ</div>
+                        <div style="font-size: 0.75rem; color: #9CA3AF;">Đang xử lý</div>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon info">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Nhận voucher giảm giá</div>
+                        <div class="activity-description">Voucher Shopee 50K</div>
+                        <div class="activity-time">1 ngày trước</div>
+                    </div>
+                    <div class="activity-value">
+                        <div style="color: #3B82F6;">-50.000đ</div>
+                        <div style="font-size: 0.75rem; color: #9CA3AF;">Giảm giá</div>
+                    </div>
+                </div>
+
+                <div class="activity-item">
+                    <div class="activity-icon success">
+                        <i class="fas fa-check-circle"></i>
+                    </div>
+                    <div class="activity-content">
+                        <div class="activity-title">Yêu cầu rút tiền thành công</div>
+                        <div class="activity-description">Chuyển khoản ngân hàng</div>
+                        <div class="activity-time">2 ngày trước</div>
+                    </div>
+                    <div class="activity-value">
+                        <div>1.000.000đ</div>
+                        <div style="font-size: 0.75rem; color: #9CA3AF;">Đã chuyển</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <div>
+            <strong id="toast-title">Thành công!</strong>
+            <div id="toast-message">Thao tác đã được thực hiện</div>
+        </div>
+    </div>
+
+    <script>
+        // Handle Quick Actions
+        function handleQuickAction(action) {
+            event.preventDefault();
+            showToast('Thao tác nhanh', `Đang mở: ${action}`);
+
+            // Simulate navigation after delay
+            setTimeout(() => {
+                if (action.includes('Mua sắm')) {
+                    window.location.href = 'san-pham.html';
+                } else if (action.includes('đơn hàng')) {
+                    window.location.href = 'don-hang.html';
+                } else if (action.includes('Rút tiền')) {
+                    window.location.href = 'so-du.html';
+                } else if (action.includes('hồ sơ')) {
+                    window.location.href = 'ho-so.html';
+                }
+            }, 500);
+        }
+
+        // Show Toast
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                showToast('Đăng xuất', 'Đang chuyển về trang chủ...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        // Animated Counter
+        function animateCounter(element, target) {
+            const duration = 1000;
+            const start = 0;
+            const increment = target / (duration / 16);
+            let current = start;
+
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    element.textContent = target.toLocaleString('vi-VN');
+                    clearInterval(timer);
+                } else {
+                    element.textContent = Math.floor(current).toLocaleString('vi-VN');
+                }
+            }, 16);
+        }
+
+        // Animate stats on load
+        document.addEventListener('DOMContentLoaded', function() {
+            document.querySelectorAll('.stat-value').forEach(element => {
+                const value = parseInt(element.textContent.replace(/\D/g, ''));
+                if (!isNaN(value)) {
+                    animateCounter(element, value);
+                }
+            });
+
+            // Add animation to cards
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.animation = 'fadeInUp 0.5s ease-out';
+                    }
+                });
+            });
+
+            document.querySelectorAll('.stat-card, .action-card').forEach(card => {
+                observer.observe(card);
+            });
+        });
+
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Refresh data simulation
+        function refreshData() {
+            showToast('Làm mới', 'Đang cập nhật dữ liệu...');
+
+            // Simulate API call
+            setTimeout(() => {
+                // Update random values
+                document.querySelectorAll('.stat-value').forEach(element => {
+                    if (element.textContent.includes('M')) {
+                        const value = Math.floor(Math.random() * 5 + 1);
+                        element.textContent = value + '.' + Math.floor(Math.random() * 9 + 1) + 'M';
+                    } else if (element.textContent.includes('K')) {
+                        const value = Math.floor(Math.random() * 900 + 100);
+                        element.textContent = (value / 1000).toFixed(1) + 'K';
+                    } else if (!element.textContent.includes('%') && !element.textContent.includes('.')) {
+                        const value = Math.floor(Math.random() * 50 + 5);
+                        element.textContent = value.toLocaleString('vi-VN');
+                    }
+                });
+
+                showToast('Thành công', 'Dữ liệu đã được cập nhật');
+            }, 1000);
+        }
+
+        // Add refresh button
+        const refreshBtn = document.createElement('button');
+        refreshBtn.innerHTML = '<i class="fas fa-sync-alt"></i> Làm mới';
+        refreshBtn.className = 'btn btn-outline btn-sm';
+        refreshBtn.style.position = 'fixed';
+        refreshBtn.style.bottom = '2rem';
+        refreshBtn.style.left = '2rem';
+        refreshBtn.onclick = refreshData;
+        document.body.appendChild(refreshBtn);
+    </script>
+</body>
+</html>

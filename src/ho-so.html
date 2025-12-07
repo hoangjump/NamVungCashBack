@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ Sơ - NamVung CashBack</title>
+    <meta name="description" content="Quản lý thông tin cá nhân và hồ sơ thành viên trên NamVung CashBack">
+    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./dashboard.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body class="dashboard-page logged-in">
+    <!-- Dashboard Header -->
+    <header class="header dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="./index.html" class="logo">
+                    <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack" width="160" height="45">
+                </a>
+
+                <nav class="dashboard-nav-inline">
+                    <ul>
+                        <li><a href="./tong-quan.html" class="nav-link">Tổng Quan</a></li>
+                        <li><a href="./don-hang.html" class="nav-link">Đơn Hàng</a></li>
+                        <li><a href="./san-pham.html" class="nav-link">Sản Phẩm</a></li>
+                        <li><a href="./so-du.html" class="nav-link">Số Dư</a></li>
+                        <li><a href="./ho-so.html" class="nav-link active">Hồ Sơ</a></li>
+                        <li><a href="./tai-khoan.html" class="nav-link">Tài Khoản</a></li>
+                    </ul>
+                </nav>
+
+                <div class="user-info-inline">
+                    <img src="https://i.ibb.co/3p5D6kZ/default-avatar.png" alt="User" class="user-avatar-small">
+                    <span class="user-name-small">Nguyễn Văn A</span>
+                    <span class="user-balance">2.150.000đ</span>
+                    <a href="#" onclick="handleLogout()" class="logout-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <div class="container">
+            <h1 class="section-title">Hồ Sơ</h1>
+
+            <div class="profile-container">
+                <!-- Profile Sidebar -->
+                <div class="profile-sidebar">
+                    <div class="profile-avatar-section">
+                        <div class="avatar-upload">
+                            <img src="https://i.ibb.co/3p5D6kZ/default-avatar.png" alt="Avatar" class="profile-avatar" id="avatar-preview">
+                            <div class="avatar-overlay">
+                                <i class="fas fa-camera"></i>
+                                <span>Đổi ảnh</span>
+                            </div>
+                            <input type="file" id="avatar-input" accept="image/*" style="display: none;">
+                        </div>
+                        <h2 class="profile-name">Nguyễn Văn A</h2>
+                        <p class="profile-email">nguyenvana@email.com</p>
+
+                        <div class="profile-rank">
+                            <div class="rank-badge silver">
+                                <i class="fas fa-medal"></i>
+                                Thành viên Bạc
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="profile-stats">
+                        <h3>Thống kê thành viên</h3>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-shopping-bag"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Đơn hàng</span>
+                                <span class="stat-value">156</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-coins"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Tổng chi tiêu</span>
+                                <span class="stat-value">45.6M</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-hand-holding-usd"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Tiền đã nhận</span>
+                                <span class="stat-value">3.8M</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-calendar"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Ngày tham gia</span>
+                                <span class="stat-value">01/01/2024</span>
+                            </div>
+                        </div>
+                        <div class="stat-item">
+                            <div class="stat-icon">
+                                <i class="fas fa-percentage"></i>
+                            </div>
+                            <div class="stat-info">
+                                <span class="stat-label">Tỷ lệ hoàn tiền</span>
+                                <span class="stat-value">8.5%</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="membership-progress">
+                        <h3>Đến hạng Vàng</h3>
+                        <div class="progress-bar">
+                            <div class="progress-fill" style="width: 65%;"></div>
+                        </div>
+                        <div class="progress-text">
+                            <span>Chi tiêu thêm: 2.5M</span>
+                            <span>65%</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Profile Main Content -->
+                <div class="profile-main">
+                    <!-- Personal Information -->
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-user"></i>
+                                Thông Tin Cá Nhân
+                            </h2>
+                            <p>Cập nhật thông tin cá nhân của bạn</p>
+                        </div>
+
+                        <form class="profile-form" id="personal-info-form">
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="full-name">Họ và tên *</label>
+                                    <input type="text" id="full-name" class="form-input" value="Nguyễn Văn A" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="display-name">Tên hiển thị</label>
+                                    <input type="text" id="display-name" class="form-input" value="Nguyễn Văn A" placeholder="Tên sẽ hiển thị trên hồ sơ">
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="email">Email *</label>
+                                    <input type="email" id="email" class="form-input" value="nguyenvana@email.com" required>
+                                    <div class="input-note">Email được dùng để đăng nhập và nhận thông báo</div>
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="phone">Số điện thoại *</label>
+                                    <input type="tel" id="phone" class="form-input" value="0912345678" required>
+                                    <div class="input-note">Số điện thoại để xác thực tài khoản</div>
+                                </div>
+                            </div>
+
+                            <div class="form-row">
+                                <div class="form-group">
+                                    <label for="birthday">Ngày sinh</label>
+                                    <input type="date" id="birthday" class="form-input" value="1990-01-01">
+                                </div>
+
+                                <div class="form-group">
+                                    <label for="gender">Giới tính</label>
+                                    <select id="gender" class="form-select">
+                                        <option value="">Chọn giới tính</option>
+                                        <option value="male">Nam</option>
+                                        <option value="female" selected>Nữ</option>
+                                        <option value="other">Khác</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="address">Địa chỉ</label>
+                                <input type="text" id="address" class="form-input" value="123 Đường ABC, Quận 1, TP.HCM">
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline">Hủy</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Lưu Thay Đổi
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-address-book"></i>
+                                Thông Tin Liên Hệ
+                            </h2>
+                            <p>Thông tin liên hệ và mạng xã hội</p>
+                        </div>
+
+                        <form class="profile-form" id="contact-form">
+                            <div class="form-group">
+                                <label for="facebook">Facebook</label>
+                                <div class="input-group">
+                                    <i class="fab fa-facebook"></i>
+                                    <input type="url" id="facebook" class="form-input" placeholder="https://facebook.com/username">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="zalo">Zalo</label>
+                                <div class="input-group">
+                                    <i class="fas fa-comment"></i>
+                                    <input type="tel" id="zalo" class="form-input" placeholder="Số điện thoại Zalo">
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="telegram">Telegram</label>
+                                <div class="input-group">
+                                    <i class="fab fa-telegram"></i>
+                                    <input type="text" id="telegram" class="form-input" placeholder="@username">
+                                </div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline">Hủy</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Cập Nhật Liên Hệ
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Preferences -->
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-cog"></i>
+                                Sở Thích & Cài Đặt
+                            </h2>
+                            <p>Tùy chỉnh trải nghiệm của bạn</p>
+                        </div>
+
+                        <form class="profile-form" id="preferences-form">
+                            <div class="form-group">
+                                <label>Danh mục yêu thích</label>
+                                <div class="checkbox-group">
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                        Thời trang & Phụ kiện
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                        Điện tử & Điện gia dụng
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                        Sức khỏe & Làm đẹp
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                        Nhà cửa & Đời sống
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox">
+                                        <span class="checkmark"></span>
+                                        Du lịch & Vé máy bay
+                                    </label>
+                                    <label class="checkbox-item">
+                                        <input type="checkbox" checked>
+                                        <span class="checkmark"></span>
+                                        Ăn uống & Giải trí
+                                    </label>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Ngôn ngữ</label>
+                                <select class="form-select">
+                                    <option value="vi" selected>Tiếng Việt</option>
+                                    <option value="en">English</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Múi giờ</label>
+                                <select class="form-select">
+                                    <option value="asia/ho_chi_minh" selected>GMT+7 (Hà Nội)</option>
+                                    <option value="asia/bangkok">GMT+7 (Bangkok)</option>
+                                    <option value="utc">UTC+0</option>
+                                </select>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline">Hủy</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Lưu Cài Đặt
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+
+                    <!-- Shopping Preferences -->
+                    <div class="profile-section">
+                        <div class="section-header">
+                            <h2>
+                                <i class="fas fa-shopping-cart"></i>
+                                Sở Thích Mua Sắm
+                            </h2>
+                            <p>Chỉnh sửa các cửa hàng và thương hiệu yêu thích của bạn</p>
+                        </div>
+
+                        <form class="profile-form" id="shopping-preferences-form">
+                            <div class="form-group">
+                                <label>Cửa hàng yêu thích</label>
+                                <div class="favorite-stores">
+                                    <div class="store-item">
+                                        <img src="https://i.ibb.co/3s8TqJ2/shopee.png" alt="Shopee" class="store-logo">
+                                        <span>Shopee</span>
+                                        <button type="button" class="btn-remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="store-item">
+                                        <img src="https://i.ibb.co/6PkJYPd/lazada.png" alt="Lazada" class="store-logo">
+                                        <span>Lazada</span>
+                                        <button type="button" class="btn-remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <div class="store-item">
+                                        <img src="https://i.ibb.co/G3WkQ8Z/tiki.png" alt="Tiki" class="store-logo">
+                                        <span>Tiki</span>
+                                        <button type="button" class="btn-remove">
+                                            <i class="fas fa-times"></i>
+                                        </button>
+                                    </div>
+                                    <button type="button" class="btn-add-store">
+                                        <i class="fas fa-plus"></i>
+                                        Thêm cửa hàng
+                                    </button>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label>Giới hạn chi tiêu hàng tháng</label>
+                                <div class="budget-input">
+                                    <input type="number" class="form-input" value="5000000" min="0">
+                                    <span class="input-suffix">đ</span>
+                                </div>
+                                <div class="input-note">Nhận cảnh báo khi chi tiêu vượt giới hạn</div>
+                            </div>
+
+                            <div class="form-actions">
+                                <button type="button" class="btn btn-outline">Hủy</button>
+                                <button type="submit" class="btn btn-primary">
+                                    <i class="fas fa-save"></i>
+                                    Cập Nhật Sở Thích
+                                </button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <div class="footer-logo">
+                        <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack">
+                        <p>Nền tảng hoàn tiền hàng đầu Việt Nam</p>
+                    </div>
+                    <div class="footer-social">
+                        <a href="#" class="social-link">
+                            <i class="fab fa-facebook-f"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-instagram"></i>
+                        </a>
+                        <a href="#" class="social-link">
+                            <i class="fab fa-youtube"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Về NamVung</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Cách hoạt động</a></li>
+                        <li><a href="#">Đối tác</a></li>
+                        <li><a href="#">Tuyển dụng</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Trung tâm giúp đỡ</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                    </ul>
+                </div>
+
+                <div class="footer-section">
+                    <h4>Đăng ký nhận tin</h4>
+                    <p>Nhận thông tin khuyến mãi mới nhất</p>
+                    <form class="newsletter-form">
+                        <input type="email" placeholder="Email của bạn">
+                        <button type="submit">
+                            <i class="fas fa-paper-plane"></i>
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="footer-bottom">
+                <div class="footer-copyright">
+                    <p>&copy; 2024 NamVung CashBack. Mọi quyền được bảo lưu.</p>
+                </div>
+                <div class="footer-payments">
+                    <p>Phương thức thanh toán:</p>
+                    <img src="https://i.ibb.co/6PkJYPd/payment-methods.png" alt="Payment Methods">
+                </div>
+                <div class="footer-certified">
+                    <p>GPĐKĐT: 12345678 do Sở KHĐT TPHCM cấp ngày 01/01/2024</p>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <script src="components/auth.js"></script>
+    <script src="script.js"></script>
+</body>
+</html>

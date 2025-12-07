@@ -1,0 +1,763 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hồ sơ cá nhân - NamVung CashBack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%);
+            min-height: 100vh;
+            color: #111827;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3B82F6;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-balance {
+            background: #3B82F6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Profile Content */
+        .profile-content {
+            display: grid;
+            grid-template-columns: 350px 1fr;
+            gap: 2rem;
+        }
+
+        /* Profile Card */
+        .profile-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            height: fit-content;
+        }
+
+        .avatar-container {
+            position: relative;
+            width: 150px;
+            height: 150px;
+            margin: 0 auto 1.5rem;
+        }
+
+        .avatar {
+            width: 100%;
+            height: 100%;
+            border-radius: 50%;
+            object-fit: cover;
+            background: #F3F4F6;
+        }
+
+        .avatar-upload {
+            position: absolute;
+            bottom: 0;
+            right: 0;
+            width: 40px;
+            height: 40px;
+            background: #3B82F6;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            cursor: pointer;
+            border: 3px solid white;
+            transition: background 0.2s;
+        }
+
+        .avatar-upload:hover {
+            background: #2563EB;
+        }
+
+        .profile-name {
+            font-size: 1.5rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .profile-email {
+            color: #6B7280;
+            margin-bottom: 1.5rem;
+        }
+
+        .profile-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 1rem;
+            padding: 1.5rem 0;
+            border-top: 1px solid #E5E7EB;
+            border-bottom: 1px solid #E5E7EB;
+            margin-bottom: 1.5rem;
+        }
+
+        .stat-item {
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .stat-label {
+            font-size: 0.875rem;
+            color: #6B7280;
+            margin-top: 0.25rem;
+        }
+
+        .member-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            background: #FEF3C7;
+            color: #92400E;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+        }
+
+        /* Form Sections */
+        .form-sections {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .section-header {
+            background: #F9FAFB;
+            padding: 1.5rem;
+            border-bottom: 1px solid #E5E7EB;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .section-content {
+            padding: 2rem;
+        }
+
+        /* Form Groups */
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-group.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        .form-input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        .form-input:disabled {
+            background: #F9FAFB;
+            color: #6B7280;
+            cursor: not-allowed;
+        }
+
+        /* Buttons */
+        .button-group {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+            margin-top: 2rem;
+            padding-top: 2rem;
+            border-top: 1px solid #E5E7EB;
+        }
+
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3B82F6;
+            border: 2px solid #3B82F6;
+        }
+
+        .btn-outline:hover {
+            background: #EFF6FF;
+        }
+
+        /* Address Cards */
+        .address-list {
+            display: grid;
+            gap: 1rem;
+        }
+
+        .address-card {
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            transition: border-color 0.2s;
+        }
+
+        .address-card:hover {
+            border-color: #3B82F6;
+        }
+
+        .address-card.default {
+            border-color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        .address-info h4 {
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .address-text {
+            color: #6B7280;
+            font-size: 0.875rem;
+            line-height: 1.5;
+        }
+
+        .address-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .icon-btn {
+            width: 32px;
+            height: 32px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: white;
+            border: 1px solid #E5E7EB;
+            border-radius: 0.25rem;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .icon-btn:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        .add-address-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: white;
+            border: 2px dashed #D1D5DB;
+            border-radius: 0.5rem;
+            color: #6B7280;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s;
+            margin-top: 1rem;
+        }
+
+        .add-address-btn:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #10B981;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .profile-content {
+                grid-template-columns: 1fr;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .button-group {
+                flex-direction: column;
+            }
+
+            .button-group .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="NamVung CashBack">
+                NamVung CashBack
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="tong-quan.html">Tổng Quan</a></li>
+                    <li><a href="don-hang.html">Đơn Hàng</a></li>
+                    <li><a href="san-pham.html">Sản Phẩm</a></li>
+                    <li><a href="so-du.html">Số Dư</a></li>
+                    <li><a href="ho-so.html" class="active">Hồ Sơ</a></li>
+                    <li><a href="tai-khoan.html">Tài Khoản</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-menu">
+                <span class="user-balance">2.150.000đ</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <div class="profile-content">
+            <!-- Profile Card -->
+            <div class="profile-card">
+                <div class="avatar-container">
+                    <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=150" alt="Avatar" class="avatar">
+                    <label class="avatar-upload">
+                        <i class="fas fa-camera"></i>
+                        <input type="file" style="display: none;" accept="image/*" onchange="updateAvatar(event)">
+                    </label>
+                </div>
+
+                <h2 class="profile-name">Nguyễn Văn A</h2>
+                <p class="profile-email">nguyenvana@email.com</p>
+
+                <div class="profile-stats">
+                    <div class="stat-item">
+                        <div class="stat-number">24</div>
+                        <div class="stat-label">Đơn hàng</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">2.1M</div>
+                        <div class="stat-label">Tiền hoàn</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">365</div>
+                        <div class="stat-label">Ngày hoạt động</div>
+                    </div>
+                </div>
+
+                <div class="member-badge">
+                    <i class="fas fa-crown"></i>
+                    Thành viên Kim Cương
+                </div>
+            </div>
+
+            <!-- Form Sections -->
+            <div class="form-sections">
+                <!-- Personal Information -->
+                <div class="section-header">
+                    <h3 class="section-title">Thông tin cá nhân</h3>
+                    <p class="section-description">Cập nhật thông tin cá nhân của bạn</p>
+                </div>
+
+                <div class="section-content">
+                    <form id="profileForm">
+                        <div class="form-grid">
+                            <div class="form-group">
+                                <label class="form-label">Họ và tên</label>
+                                <input type="text" class="form-input" value="Nguyễn Văn A" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Số điện thoại</label>
+                                <input type="tel" class="form-input" value="0912345678" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Email</label>
+                                <input type="email" class="form-input" value="nguyenvana@email.com" disabled>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Ngày sinh</label>
+                                <input type="date" class="form-input" value="1990-01-01">
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">Giới tính</label>
+                                <select class="form-input">
+                                    <option value="male" selected>Nam</option>
+                                    <option value="female">Nữ</option>
+                                    <option value="other">Khác</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group full-width">
+                                <label class="form-label">Địa chỉ</label>
+                                <input type="text" class="form-input" value="123 Đường ABC, Quận 1, TP.HCM">
+                            </div>
+                        </div>
+
+                        <div class="button-group">
+                            <button type="button" class="btn btn-outline" onclick="resetForm()">
+                                <i class="fas fa-times"></i>
+                                Hủy
+                            </button>
+                            <button type="submit" class="btn btn-primary">
+                                <i class="fas fa-save"></i>
+                                Lưu thay đổi
+                            </button>
+                        </div>
+                    </form>
+                </div>
+
+                <!-- Shipping Addresses -->
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h3 class="section-title">Địa chỉ nhận hàng</h3>
+                    <p class="section-description">Quản lý địa chỉ nhận hàng của bạn</p>
+                </div>
+
+                <div class="section-content">
+                    <div class="address-list">
+                        <div class="address-card default">
+                            <div class="address-info">
+                                <h4>Nhà</h4>
+                                <p class="address-text">
+                                    Nguyễn Văn A<br>
+                                    0912345678<br>
+                                    123 Đường ABC, Phường 1, Quận 1, TP. Hồ Chí Minh
+                                </p>
+                            </div>
+                            <div class="address-actions">
+                                <button class="icon-btn" onclick="editAddress(1)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="icon-btn" onclick="deleteAddress(1)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="address-card">
+                            <div class="address-info">
+                                <h4>Văn phòng</h4>
+                                <p class="address-text">
+                                    Nguyễn Văn A<br>
+                                    0912345678<br>
+                                    456 Đường XYZ, Phường 2, Quận 3, TP. Hồ Chí Minh
+                                </p>
+                            </div>
+                            <div class="address-actions">
+                                <button class="icon-btn" onclick="editAddress(2)">
+                                    <i class="fas fa-edit"></i>
+                                </button>
+                                <button class="icon-btn" onclick="deleteAddress(2)">
+                                    <i class="fas fa-trash"></i>
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+
+                    <button class="add-address-btn" onclick="addAddress()">
+                        <i class="fas fa-plus"></i>
+                        Thêm địa chỉ mới
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <div>
+            <strong id="toast-title">Thành công!</strong>
+            <div id="toast-message">Thao tác đã được thực hiện</div>
+        </div>
+    </div>
+
+    <script>
+        // Profile Form
+        document.getElementById('profileForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            showToast('Cập nhật thành công', 'Thông tin cá nhân đã được cập nhật');
+        });
+
+        // Reset Form
+        function resetForm() {
+            if (confirm('Bạn có chắc muốn hủy thay đổi?')) {
+                document.getElementById('profileForm').reset();
+                showToast('Đã hủy', 'Thay đổi đã được hủy bỏ');
+            }
+        }
+
+        // Update Avatar
+        function updateAvatar(event) {
+            const file = event.target.files[0];
+            if (file) {
+                showToast('Cập nhật avatar', 'Đang tải ảnh lên...');
+                // In real app, upload to server
+                setTimeout(() => {
+                    showToast('Thành công', 'Avatar đã được cập nhật');
+                }, 1000);
+            }
+        }
+
+        // Address Actions
+        function editAddress(id) {
+            showToast('Sửa địa chỉ', `Đang sửa địa chỉ #${id}...`);
+        }
+
+        function deleteAddress(id) {
+            if (confirm('Bạn có chắc muốn xóa địa chỉ này?')) {
+                showToast('Xóa thành công', `Địa chỉ #${id} đã được xóa`);
+                // In real app, remove from DOM and update server
+                event.target.closest('.address-card').remove();
+            }
+        }
+
+        function addAddress() {
+            showToast('Thêm địa chỉ', 'Đang mở form thêm địa chỉ mới...');
+        }
+
+        // Show Toast
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                showToast('Đăng xuất', 'Đang chuyển về trang chủ...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        // Input validation
+        document.querySelectorAll('.form-input[required]').forEach(input => {
+            input.addEventListener('blur', function() {
+                if (!this.value) {
+                    this.style.borderColor = '#EF4444';
+                } else {
+                    this.style.borderColor = '#E5E7EB';
+                }
+            });
+        });
+
+        // Phone number validation
+        document.querySelector('input[type="tel"]').addEventListener('input', function() {
+            const phone = this.value.replace(/\D/g, '');
+            if (phone.length < 10 || phone.length > 11) {
+                this.style.borderColor = '#F59E0B';
+            } else {
+                this.style.borderColor = '#10B981';
+            }
+        });
+    </script>
+</body>
+</html>

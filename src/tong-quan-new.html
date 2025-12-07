@@ -1,0 +1,507 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tổng Quan - NamVung CashBack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./dashboard-new.css">
+</head>
+<body class="dashboard-page">
+    <!-- Dashboard Header -->
+    <header class="header dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="./index.html" class="logo">
+                    <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack">
+                </a>
+
+                <nav class="dashboard-nav-inline">
+                    <ul>
+                        <li><a href="./tong-quan.html" class="nav-link active">
+                            <i class="fas fa-chart-line"></i>
+                            Tổng Quan
+                        </a></li>
+                        <li><a href="./don-hang.html" class="nav-link">
+                            <i class="fas fa-shopping-bag"></i>
+                            Đơn Hàng
+                        </a></li>
+                        <li><a href="./san-pham.html" class="nav-link">
+                            <i class="fas fa-box"></i>
+                            Sản Phẩm
+                        </a></li>
+                        <li><a href="./so-du.html" class="nav-link">
+                            <i class="fas fa-wallet"></i>
+                            Số Dư
+                        </a></li>
+                        <li><a href="./ho-so.html" class="nav-link">
+                            <i class="fas fa-user"></i>
+                            Hồ Sơ
+                        </a></li>
+                        <li><a href="./tai-khoan.html" class="nav-link">
+                            <i class="fas fa-cog"></i>
+                            Tài Khoản
+                        </a></li>
+                    </ul>
+                </nav>
+
+                <div class="user-info-inline">
+                    <img src="https://i.ibb.co/3p5D6kZ/default-avatar.png" alt="User" class="user-avatar-small">
+                    <span class="user-name-small">Nguyễn Văn A</span>
+                    <span class="user-balance">2.150.000đ</span>
+                    <a href="#" onclick="handleLogout()" class="logout-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        <!-- Welcome Section -->
+        <div class="welcome-card">
+            <h1>Chào mừng trở lại, Nguyễn Văn A! 👋</h1>
+            <p class="welcome-text">Hôm nay bạn có <strong>3 đơn hàng</strong> đang chờ xác nhận</p>
+        </div>
+
+        <!-- Quick Stats -->
+        <div class="stats-cards-grid">
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-chart-line"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Tổng doanh thu</h3>
+                    <p class="stat-number">18.286.000đ</p>
+                    <small class="stat-change text-success">+12.5% so với tháng trước</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-coins"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Tiền hoàn nhận</h3>
+                    <p class="stat-number">4.256.000đ</p>
+                    <small class="stat-change text-success">+8.3% so với tháng trước</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-shopping-bag"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Đơn hàng thành công</h3>
+                    <p class="stat-number">156</p>
+                    <small class="stat-change text-success">+23 đơn hàng mới</small>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon">
+                    <i class="fas fa-percent"></i>
+                </div>
+                <div class="stat-content">
+                    <h3>Tỷ lệ hoàn tiền</h3>
+                    <p class="stat-number">8.5%</p>
+                    <small class="stat-change text-warning">Giảm 0.5%</small>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions -->
+        <section class="quick-actions">
+            <h2 class="section-title">Thao tác nhanh</h2>
+            <div class="actions-grid">
+                <a href="#" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-plus-circle"></i>
+                    </div>
+                    <h3>Tạo đơn hàng mới</h3>
+                    <p>Gửi yêu cầu hoàn tiền cho đơn hàng mới</p>
+                </a>
+
+                <a href="./so-du.html" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-hand-holding-usd"></i>
+                    </div>
+                    <h3>Rút tiền</h3>
+                    <p>Yêu cầu rút số dư về tài khoản</p>
+                </a>
+
+                <a href="#" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-gift"></i>
+                    </div>
+                    <h3>Khuyến mãi</h3>
+                    <p>Xem các chương trình đang diễn ra</p>
+                </a>
+
+                <a href="#" class="action-card">
+                    <div class="action-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <h3>Hỗ trợ</h3>
+                    <p>Liên hệ với đội ngũ hỗ trợ</p>
+                </a>
+            </div>
+        </section>
+
+        <!-- Recent Orders -->
+        <section class="recent-orders">
+            <div class="section-header">
+                <h2>Đơn hàng gần đây</h2>
+                <a href="./don-hang.html" class="btn btn-outline">Xem tất cả</a>
+            </div>
+
+            <div class="orders-table-wrapper">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Cửa hàng</th>
+                            <th>Giá trị</th>
+                            <th>Tiền hoàn</th>
+                            <th>Trạng thái</th>
+                            <th>Ngày đặt</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#DH001234</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fab fa-shopee" style="color: #ee4d2d;"></i>
+                                    <span>Shopee</span>
+                                </div>
+                            </td>
+                            <td>1.250.000đ</td>
+                            <td><strong class="text-success">125.000đ</strong></td>
+                            <td><span class="status-badge success">Hoàn thành</span></td>
+                            <td>01/12/2024</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Liên hệ">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#DH001235</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fab fa-lazada" style="color: #01b3cc;"></i>
+                                    <span>Lazada</span>
+                                </div>
+                            </td>
+                            <td>850.000đ</td>
+                            <td><strong class="text-success">68.000đ</strong></td>
+                            <td><span class="status-badge processing">Đang xử lý</span></td>
+                            <td>30/11/2024</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Hủy">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#DH001236</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fab fa-tiktok" style="color: #000000;"></i>
+                                    <span>TikTok Shop</span>
+                                </div>
+                            </td>
+                            <td>2.100.000đ</td>
+                            <td><strong class="text-success">210.000đ</strong></td>
+                            <td><span class="status-badge pending">Chờ xác nhận</span></td>
+                            <td>29/11/2024</td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Cập nhật">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <div class="table-footer">
+                <span class="table-info">Hiển thị 3 trong tổng số 156 đơn hàng</span>
+                <div class="pagination">
+                    <button class="btn btn-outline btn-sm" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-primary btn-sm">1</button>
+                    <button class="btn btn-outline btn-sm">2</button>
+                    <button class="btn btn-outline btn-sm">3</button>
+                    <button class="btn btn-outline btn-sm">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <!-- Activity Chart -->
+        <section class="activity-section">
+            <h2 class="section-title">Hoạt động gần đây</h2>
+            <div class="activity-chart">
+                <canvas id="activityChart"></canvas>
+            </div>
+        </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NamVung CashBack</h3>
+                    <p>Nền tảng hoàn tiền uy tín hàng đầu Việt Nam</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Về chúng tôi</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Phương thức thanh toán</a></li>
+                        <li><a href="#">Chương trình giới thiệu</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Đối tác</h4>
+                    <ul>
+                        <li><a href="#">Shopee</a></li>
+                        <li><a href="#">Lazada</a></li>
+                        <li><a href="#">TikTok Shop</a></li>
+                        <li><a href="#">Đăng ký đối tác</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NamVung CashBack. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./components/auth.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        // Initialize user data on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await window.currentUser.updateUI();
+            initActivityChart();
+        });
+
+        // Initialize Activity Chart
+        function initActivityChart() {
+            const ctx = document.getElementById('activityChart');
+            if (ctx) {
+                new Chart(ctx, {
+                    type: 'line',
+                    data: {
+                        labels: ['Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                        datasets: [{
+                            label: 'Tiền hoàn nhận',
+                            data: [2800000, 3200000, 3100000, 3800000, 4200000, 4256000],
+                            borderColor: '#6366f1',
+                            backgroundColor: 'rgba(99, 102, 241, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4
+                        }, {
+                            label: 'Số đơn hàng',
+                            data: [120, 135, 128, 145, 150, 156],
+                            borderColor: '#10b981',
+                            backgroundColor: 'rgba(16, 185, 129, 0.1)',
+                            borderWidth: 2,
+                            fill: true,
+                            tension: 0.4,
+                            yAxisID: 'y1'
+                        }]
+                    },
+                    options: {
+                        responsive: true,
+                        maintainAspectRatio: false,
+                        plugins: {
+                            legend: {
+                                display: true,
+                                position: 'top',
+                            },
+                            tooltip: {
+                                mode: 'index',
+                                intersect: false,
+                            }
+                        },
+                        scales: {
+                            y: {
+                                type: 'linear',
+                                display: true,
+                                position: 'left',
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString('vi-VN') + 'đ';
+                                    }
+                                }
+                            },
+                            y1: {
+                                type: 'linear',
+                                display: true,
+                                position: 'right',
+                                ticks: {
+                                    callback: function(value) {
+                                        return value.toLocaleString('vi-VN');
+                                    }
+                                },
+                                grid: {
+                                    drawOnChartArea: false,
+                                }
+                            }
+                        }
+                    }
+                });
+            }
+        }
+
+        // Button Icons Styling
+        const btnIconCSS = `
+            .btn-icon {
+                width: 32px;
+                height: 32px;
+                display: inline-flex;
+                align-items: center;
+                justify-content: center;
+                border: 1px solid var(--border);
+                background: var(--bg-primary);
+                border-radius: var(--radius);
+                color: var(--text-secondary);
+                font-size: 0.875rem;
+                cursor: pointer;
+                transition: all 0.2s;
+                margin-right: 0.5rem;
+            }
+
+            .btn-icon:hover {
+                color: var(--primary);
+                border-color: var(--primary);
+                background: rgba(99, 102, 241, 0.1);
+            }
+
+            .welcome-card {
+                background: linear-gradient(135deg, var(--primary), var(--primary-dark));
+                color: white;
+                padding: 2rem;
+                border-radius: var(--radius-xl);
+                margin-bottom: 2rem;
+                box-shadow: var(--shadow-lg);
+            }
+
+            .welcome-card h1 {
+                font-size: 1.875rem;
+                font-weight: 700;
+                margin: 0 0 0.5rem 0;
+            }
+
+            .welcome-text {
+                font-size: 1rem;
+                opacity: 0.9;
+                margin: 0;
+            }
+
+            .stat-change {
+                font-size: 0.75rem;
+                font-weight: 500;
+                margin-top: 0.25rem;
+                display: block;
+            }
+
+            .text-success {
+                color: var(--success);
+            }
+
+            .text-warning {
+                color: var(--warning);
+            }
+
+            .activity-section {
+                margin-top: 3rem;
+            }
+
+            .activity-chart {
+                background: var(--bg-primary);
+                border: 1px solid var(--border);
+                border-radius: var(--radius-lg);
+                padding: 2rem;
+                height: 300px;
+            }
+
+            .table-footer {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 1rem;
+                padding-top: 1rem;
+                border-top: 1px solid var(--border);
+            }
+
+            .table-info {
+                font-size: 0.875rem;
+                color: var(--text-secondary);
+            }
+
+            .pagination {
+                display: flex;
+                gap: 0.5rem;
+            }
+
+            .action-buttons {
+                display: flex;
+                align-items: center;
+            }
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = btnIconCSS;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

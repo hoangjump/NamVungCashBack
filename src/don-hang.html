@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn Hàng - NamVung CashBack</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./styles.css">
+    <link rel="stylesheet" href="./dashboard.css">
+</head>
+<body class="dashboard-page logged-in">
+    <!-- Header Dashboard -->
+    <header class="header dashboard-header">
+        <div class="container">
+            <div class="header-content">
+                <a href="./index.html" class="logo">
+                    <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack" width="160" height="45">
+                </a>
+
+                <nav class="dashboard-nav-inline">
+                    <ul>
+                        <li><a href="./tong-quan.html" class="nav-link">Tổng Quan</a></li>
+                        <li><a href="./don-hang.html" class="nav-link active">Đơn Hàng</a></li>
+                        <li><a href="./san-pham.html" class="nav-link">Sản Phẩm</a></li>
+                        <li><a href="./so-du.html" class="nav-link">Số Dư</a></li>
+                        <li><a href="./ho-so.html" class="nav-link">Hồ Sơ</a></li>
+                        <li><a href="./tai-khoan.html" class="nav-link">Tài Khoản</a></li>
+                    </ul>
+                </nav>
+
+                <div class="user-info-inline">
+                    <img src="https://i.ibb.co/3p5D6kZ/default-avatar.png" alt="User" class="user-avatar-small">
+                    <span class="user-name-small">Nguyễn Văn A</span>
+                    <span class="user-balance">2,150,000đ</span>
+                    <a href="#" onclick="handleLogout()" class="logout-link">
+                        <i class="fas fa-sign-out-alt"></i>
+                    </a>
+                </div>
+
+                <button class="mobile-menu-toggle">
+                    <i class="fas fa-bars"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Dashboard Content -->
+    <main class="dashboard-main">
+        <div class="container">
+            <div class="section-header">
+                <h1 class="section-title">Đơn Hàng</h1>
+                <button class="btn btn-primary">
+                    <i class="fas fa-plus"></i>
+                    Thêm đơn hàng mới
+                </button>
+            </div>
+
+            <!-- Filters -->
+            <div class="orders-filters">
+                <div class="filter-group">
+                    <label>Tìm kiếm</label>
+                    <input type="text" placeholder="Nhập mã đơn hàng hoặc tên cửa hàng">
+                </div>
+                <div class="filter-group">
+                    <label>Trạng thái</label>
+                    <select>
+                        <option>Tất cả</option>
+                        <option>Đang xử lý</option>
+                        <option>Đã xác nhận</option>
+                        <option>Hoàn thành</option>
+                        <option>Đã hủy</option>
+                    </select>
+                </div>
+                <div class="filter-group">
+                    <label>Từ ngày</label>
+                    <input type="date">
+                </div>
+                <div class="filter-group">
+                    <label>Đến ngày</label>
+                    <input type="date">
+                </div>
+                <div class="filter-group">
+                    <button class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                        Tìm kiếm
+                    </button>
+                </div>
+            </div>
+
+            <!-- Orders Table -->
+            <div class="orders-table-container">
+                <table class="orders-table">
+                    <thead>
+                        <tr>
+                            <th>Mã đơn hàng</th>
+                            <th>Cửa hàng</th>
+                            <th>Ngày mua</th>
+                            <th>Giá trị</th>
+                            <th>Hoàn tiền</th>
+                            <th>Trạng thái</th>
+                            <th>Thao tác</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><strong>#DH001234</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fab fa-shopee"></i>
+                                    <span>Shopee - TechStore</span>
+                                </div>
+                            </td>
+                            <td>01/12/2024</td>
+                            <td>1,250,000đ</td>
+                            <td class="cashback-amount">125,000đ</td>
+                            <td><span class="status-badge success">Hoàn thành</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Liên hệ">
+                                        <i class="fas fa-comment"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#DH001235</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fab fa-lazada"></i>
+                                    <span>Lazada - Fashion Mall</span>
+                                </div>
+                            </td>
+                            <td>30/11/2024</td>
+                            <td>850,000đ</td>
+                            <td class="cashback-amount">68,000đ</td>
+                            <td><span class="status-badge processing">Đang xử lý</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Hủy">
+                                        <i class="fas fa-times"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#DH001236</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fab fa-tiktok"></i>
+                                    <span>TikTok Shop - Beauty</span>
+                                </div>
+                            </td>
+                            <td>29/11/2024</td>
+                            <td>2,100,000đ</td>
+                            <td class="cashback-amount">210,000đ</td>
+                            <td><span class="status-badge pending">Chờ xác nhận</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Cập nhật">
+                                        <i class="fas fa-edit"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#DH001237</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fab fa-shopee"></i>
+                                    <span>Shopee - Home Decor</span>
+                                </div>
+                            </td>
+                            <td>28/11/2024</td>
+                            <td>650,000đ</td>
+                            <td class="cashback-amount">52,000đ</td>
+                            <td><span class="status-badge cancelled">Đã hủy</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Tạo lại">
+                                        <i class="fas fa-redo"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><strong>#DH001238</strong></td>
+                            <td>
+                                <div class="store-info">
+                                    <i class="fas fa-store"></i>
+                                    <span>Sàn khác</span>
+                                </div>
+                            </td>
+                            <td>27/11/2024</td>
+                            <td>3,200,000đ</td>
+                            <td class="cashback-amount">288,000đ</td>
+                            <td><span class="status-badge success">Hoàn thành</span></td>
+                            <td>
+                                <div class="action-buttons">
+                                    <button class="btn-icon" title="Chi tiết">
+                                        <i class="fas fa-eye"></i>
+                                    </button>
+                                    <button class="btn-icon" title="Tải hóa đơn">
+                                        <i class="fas fa-download"></i>
+                                    </button>
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+
+            <!-- Pagination -->
+            <div class="orders-pagination">
+                <span class="pagination-info">Hiển thị 1-10 trong tổng số 156 đơn hàng</span>
+                <div class="pagination-controls">
+                    <button class="btn btn-outline" disabled>
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <button class="btn btn-primary">1</button>
+                    <button class="btn btn-outline">2</button>
+                    <button class="btn btn-outline">3</button>
+                    <button class="btn btn-outline">4</button>
+                    <button class="btn btn-outline">5</button>
+                    <button class="btn btn-outline">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h3>NamVung CashBack</h3>
+                    <p>Nền tảng hoàn tiền uy tín hàng đầu Việt Nam</p>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-facebook"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-youtube"></i></a>
+                        <a href="#"><i class="fab fa-tiktok"></i></a>
+                    </div>
+                </div>
+                <div class="footer-section">
+                    <h4>Về chúng tôi</h4>
+                    <ul>
+                        <li><a href="#">Giới thiệu</a></li>
+                        <li><a href="#">Điều khoản sử dụng</a></li>
+                        <li><a href="#">Chính sách bảo mật</a></li>
+                        <li><a href="#">Liên hệ</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Hỗ trợ</h4>
+                    <ul>
+                        <li><a href="#">Câu hỏi thường gặp</a></li>
+                        <li><a href="#">Hướng dẫn sử dụng</a></li>
+                        <li><a href="#">Phương thức thanh toán</a></li>
+                        <li><a href="#">Chương trình giới thiệu</a></li>
+                    </ul>
+                </div>
+                <div class="footer-section">
+                    <h4>Đối tác</h4>
+                    <ul>
+                        <li><a href="#">Shopee</a></li>
+                        <li><a href="#">Lazada</a></li>
+                        <li><a href="#">TikTok Shop</a></li>
+                        <li><a href="#">Đăng ký đối tác</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 NamVung CashBack. Tất cả quyền được bảo lưu.</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Scripts -->
+    <script src="./components/auth.js"></script>
+    <script>
+        // Initialize user data on page load
+        document.addEventListener('DOMContentLoaded', async () => {
+            await window.currentUser.updateUI();
+        });
+    </script>
+</body>
+</html>

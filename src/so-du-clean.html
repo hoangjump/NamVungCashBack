@@ -1,0 +1,942 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Số dư - NamVung CashBack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%);
+            min-height: 100vh;
+            color: #111827;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3B82F6;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-balance {
+            background: #3B82F6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Balance Cards */
+        .balance-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .balance-card {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .balance-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .balance-card.primary {
+            background: linear-gradient(135deg, #3B82F6, #2563EB);
+            color: white;
+        }
+
+        .balance-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .balance-icon {
+            width: 60px;
+            height: 60px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+        }
+
+        .balance-card.primary .balance-icon {
+            background: rgba(255, 255, 255, 0.2);
+        }
+
+        .balance-card:not(.primary) .balance-icon {
+            background: #F3F4F6;
+            color: #3B82F6;
+        }
+
+        .balance-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+
+        .balance-amount {
+            font-size: 2.5rem;
+            font-weight: 700;
+            line-height: 1;
+        }
+
+        .balance-card:not(.primary) .balance-amount {
+            color: #111827;
+        }
+
+        .balance-change {
+            font-size: 0.875rem;
+            margin-top: 0.75rem;
+            opacity: 0.9;
+        }
+
+        /* Withdraw Section */
+        .withdraw-section {
+            background: white;
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            margin-bottom: 2rem;
+        }
+
+        .section-header {
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+            margin-bottom: 0.5rem;
+        }
+
+        .section-description {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .withdraw-methods {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .method-card {
+            padding: 1.5rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .method-card:hover,
+        .method-card.selected {
+            border-color: #3B82F6;
+            background: #EFF6FF;
+        }
+
+        .method-icon {
+            width: 48px;
+            height: 48px;
+            margin: 0 auto 1rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 0.5rem;
+            font-size: 1.5rem;
+        }
+
+        .method-icon.bank {
+            background: #DBEAFE;
+            color: #3B82F6;
+        }
+
+        .method-icon.momo {
+            background: #FEF3C7;
+            color: #F59E0B;
+        }
+
+        .method-icon.zalopay {
+            background: #EDE7FE;
+            color: #7C3AED;
+        }
+
+        .method-name {
+            font-weight: 500;
+            color: #111827;
+        }
+
+        /* Withdraw Form */
+        .withdraw-form {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        .form-group {
+            display: flex;
+            flex-direction: column;
+            gap: 0.5rem;
+        }
+
+        .form-label {
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #111827;
+        }
+
+        .form-input {
+            padding: 0.75rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        .quick-amounts {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+            margin-top: 0.5rem;
+        }
+
+        .quick-amount {
+            padding: 0.5rem 1rem;
+            background: #F3F4F6;
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .quick-amount:hover {
+            background: #E5E7EB;
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        /* Transaction History */
+        .transaction-section {
+            background: white;
+            border-radius: 1rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+
+        .transaction-header {
+            padding: 1.5rem;
+            background: #F9FAFB;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .filter-tab {
+            padding: 0.5rem 1rem;
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tab:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        .filter-tab.active {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            color: white;
+        }
+
+        .transaction-list {
+            padding: 1rem;
+        }
+
+        .transaction-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 1rem;
+            border-radius: 0.5rem;
+            margin-bottom: 0.5rem;
+            transition: background 0.2s;
+        }
+
+        .transaction-item:hover {
+            background: #F9FAFB;
+        }
+
+        .transaction-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            flex: 1;
+        }
+
+        .transaction-icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1rem;
+        }
+
+        .transaction-icon.income {
+            background: #D1FAE5;
+            color: #10B981;
+        }
+
+        .transaction-icon.outcome {
+            background: #FEE2E2;
+            color: #EF4444;
+        }
+
+        .transaction-icon.pending {
+            background: #FEF3C7;
+            color: #F59E0B;
+        }
+
+        .transaction-details {
+            flex: 1;
+        }
+
+        .transaction-title {
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .transaction-meta {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .transaction-amount {
+            font-weight: 600;
+            font-size: 1rem;
+        }
+
+        .transaction-amount.positive {
+            color: #10B981;
+        }
+
+        .transaction-amount.negative {
+            color: #EF4444;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+        }
+
+        .btn-primary:disabled {
+            background: #9CA3AF;
+            cursor: not-allowed;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3B82F6;
+            border: 2px solid #3B82F6;
+        }
+
+        .btn-outline:hover {
+            background: #EFF6FF;
+        }
+
+        .btn-block {
+            width: 100%;
+            justify-content: center;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #10B981;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .balance-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .withdraw-methods {
+                grid-template-columns: 1fr;
+            }
+
+            .transaction-header {
+                flex-direction: column;
+                align-items: start;
+                gap: 1rem;
+            }
+
+            .filter-tabs {
+                width: 100%;
+                overflow-x: auto;
+            }
+
+            .transaction-item {
+                flex-direction: column;
+                align-items: start;
+                gap: 1rem;
+            }
+
+            .transaction-amount {
+                align-self: end;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="NamVung CashBack">
+                NamVung CashBack
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="tong-quan.html">Tổng Quan</a></li>
+                    <li><a href="don-hang.html">Đơn Hàng</a></li>
+                    <li><a href="san-pham.html">Sản Phẩm</a></li>
+                    <li><a href="so-du.html" class="active">Số Dư</a></li>
+                    <li><a href="ho-so.html">Hồ Sơ</a></li>
+                    <li><a href="tai-khoan.html">Tài Khoản</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-menu">
+                <span class="user-balance">2.150.000đ</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <!-- Balance Cards -->
+        <div class="balance-cards">
+            <div class="balance-card primary">
+                <div class="balance-header">
+                    <div>
+                        <div class="balance-label">Số dư khả dụng</div>
+                        <div class="balance-amount">2.150.000đ</div>
+                        <div class="balance-change">
+                            <i class="fas fa-arrow-up"></i> +12% so với tháng trước
+                        </div>
+                    </div>
+                    <div class="balance-icon">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="balance-card">
+                <div class="balance-header">
+                    <div>
+                        <div class="balance-label">Đang xử lý</div>
+                        <div class="balance-amount">450.000đ</div>
+                        <div class="balance-change" style="color: #6B7280;">
+                            3 giao dịch đang chờ
+                        </div>
+                    </div>
+                    <div class="balance-icon">
+                        <i class="fas fa-clock"></i>
+                    </div>
+                </div>
+            </div>
+
+            <div class="balance-card">
+                <div class="balance-header">
+                    <div>
+                        <div class="balance-label">Tổng tiền hoàn</div>
+                        <div class="balance-amount">5.780.000đ</div>
+                        <div class="balance-change" style="color: #6B7280;">
+                            Tất cả thời gian
+                        </div>
+                    </div>
+                    <div class="balance-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Withdraw Section -->
+        <div class="withdraw-section">
+            <div class="section-header">
+                <h2 class="section-title">Rút tiền</h2>
+                <p class="section-description">Yêu cầu rút tiền về tài khoản của bạn</p>
+            </div>
+
+            <div class="withdraw-methods">
+                <div class="method-card selected" onclick="selectMethod(this, 'bank')">
+                    <div class="method-icon bank">
+                        <i class="fas fa-university"></i>
+                    </div>
+                    <div class="method-name">Chuyển khoản</div>
+                </div>
+
+                <div class="method-card" onclick="selectMethod(this, 'momo')">
+                    <div class="method-icon momo">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="method-name">MoMo</div>
+                </div>
+
+                <div class="method-card" onclick="selectMethod(this, 'zalopay')">
+                    <div class="method-icon zalopay">
+                        <i class="fas fa-wallet"></i>
+                    </div>
+                    <div class="method-name">ZaloPay</div>
+                </div>
+            </div>
+
+            <form class="withdraw-form" onsubmit="handleWithdraw(event)">
+                <div class="form-group">
+                    <label class="form-label">Số tiền</label>
+                    <input type="number" class="form-input" id="withdrawAmount" placeholder="Nhập số tiền muốn rút" min="50000" max="2150000" required>
+                    <div class="quick-amounts">
+                        <button type="button" class="quick-amount" onclick="setAmount(100000)">100K</button>
+                        <button type="button" class="quick-amount" onclick="setAmount(500000)">500K</button>
+                        <button type="button" class="quick-amount" onclick="setAmount(1000000)">1M</button>
+                        <button type="button" class="quick-amount" onclick="setAmount(2000000)">2M</button>
+                        <button type="button" class="quick-amount" onclick="setAmount(2150000)">Tất cả</button>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Thông tin tài khoản</label>
+                    <input type="text" class="form-input" placeholder="Ngân hàng" value="Vietcombank" required>
+                    <input type="text" class="form-input" placeholder="Số tài khoản" value="1234567890" required style="margin-top: 0.75rem;">
+                    <input type="text" class="form-input" placeholder="Chủ tài khoản" value="NGUYEN VAN A" required style="margin-top: 0.75rem;">
+                </div>
+
+                <button type="submit" class="btn btn-primary btn-block">
+                    <i class="fas fa-paper-plane"></i>
+                    Yêu cầu rút tiền
+                </button>
+            </form>
+        </div>
+
+        <!-- Transaction History -->
+        <div class="transaction-section">
+            <div class="transaction-header">
+                <div>
+                    <h2 class="section-title">Lịch sử giao dịch</h2>
+                    <p class="section-description">Xem tất cả các giao dịch gần đây</p>
+                </div>
+                <div class="filter-tabs">
+                    <button class="filter-tab active" onclick="filterTransactions('all')">Tất cả</button>
+                    <button class="filter-tab" onclick="filterTransactions('income')">Tiền vào</button>
+                    <button class="filter-tab" onclick="filterTransactions('outcome')">Tiền ra</button>
+                    <button class="filter-tab" onclick="filterTransactions('pending')">Đang xử lý</button>
+                </div>
+            </div>
+
+            <div class="transaction-list">
+                <div class="transaction-item" data-type="income">
+                    <div class="transaction-info">
+                        <div class="transaction-icon income">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">Tiền hoàn đơn hàng #DH001230</div>
+                            <div class="transaction-meta">Shopee • 20/11/2024 14:30</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+150.000đ</div>
+                </div>
+
+                <div class="transaction-item" data-type="outcome">
+                    <div class="transaction-info">
+                        <div class="transaction-icon outcome">
+                            <i class="fas fa-paper-plane"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">Rút tiền về ngân hàng</div>
+                            <div class="transaction-meta">Vietcombank • 19/11/2024 10:15</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount negative">-1.000.000đ</div>
+                </div>
+
+                <div class="transaction-item" data-type="income">
+                    <div class="transaction-info">
+                        <div class="transaction-icon income">
+                            <i class="fas fa-shopping-bag"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">Tiền hoàn đơn hàng #DH001229</div>
+                            <div class="transaction-meta">Lazada • 18/11/2024 16:45</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+300.000đ</div>
+                </div>
+
+                <div class="transaction-item" data-type="pending">
+                    <div class="transaction-info">
+                        <div class="transaction-icon pending">
+                            <i class="fas fa-clock"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">Tiền hoàn đơn hàng #DH001234</div>
+                            <div class="transaction-meta">Tiki • 21/11/2024 09:20</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount">+450.000đ</div>
+                </div>
+
+                <div class="transaction-item" data-type="income">
+                    <div class="transaction-info">
+                        <div class="transaction-icon income">
+                            <i class="fas fa-gift"></i>
+                        </div>
+                        <div class="transaction-details">
+                            <div class="transaction-title">Thưởng giới thiệu bạn bè</div>
+                            <div class="transaction-meta">Bonus • 17/11/2024 11:00</div>
+                        </div>
+                    </div>
+                    <div class="transaction-amount positive">+50.000đ</div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <div>
+            <strong id="toast-title">Thành công!</strong>
+            <div id="toast-message">Thao tác đã được thực hiện</div>
+        </div>
+    </div>
+
+    <script>
+        // Select Withdraw Method
+        function selectMethod(element, method) {
+            document.querySelectorAll('.method-card').forEach(card => {
+                card.classList.remove('selected');
+            });
+            element.classList.add('selected');
+
+            // Update form based on method
+            const inputs = document.querySelectorAll('.withdraw-form .form-input');
+            if (method === 'momo') {
+                inputs[1].value = 'MoMo Wallet';
+                inputs[1].placeholder = 'Số điện thoại MoMo';
+            } else if (method === 'zalopay') {
+                inputs[1].value = 'ZaloPay';
+                inputs[1].placeholder = 'Số điện thoại ZaloPay';
+            } else {
+                inputs[1].value = 'Vietcombank';
+                inputs[1].placeholder = 'Ngân hàng';
+            }
+
+            showToast('Phương thức', `Đã chọn: ${element.querySelector('.method-name').textContent}`);
+        }
+
+        // Set Amount
+        function setAmount(amount) {
+            document.getElementById('withdrawAmount').value = amount;
+        }
+
+        // Handle Withdraw
+        function handleWithdraw(event) {
+            event.preventDefault();
+
+            const amount = document.getElementById('withdrawAmount').value;
+
+            if (amount < 50000) {
+                showToast('Lỗi', 'Số tiền rút tối thiểu là 50.000đ');
+                return;
+            }
+
+            showToast('Thành công', `Yêu cầu rút ${parseInt(amount).toLocaleString('vi-VN')}đ đã được gửi`);
+
+            // Reset form
+            setTimeout(() => {
+                document.getElementById('withdrawAmount').value = '';
+            }, 1000);
+        }
+
+        // Filter Transactions
+        function filterTransactions(type) {
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Filter items
+            const items = document.querySelectorAll('.transaction-item');
+            items.forEach(item => {
+                if (type === 'all') {
+                    item.style.display = 'flex';
+                } else if (type === 'pending') {
+                    item.style.display = item.dataset.type === 'pending' ? 'flex' : 'none';
+                } else {
+                    item.style.display = item.dataset.type === type ? 'flex' : 'none';
+                }
+            });
+
+            const typeText = {
+                'all': 'Tất cả giao dịch',
+                'income': 'Giao dịch tiền vào',
+                'outcome': 'Giao dịch tiền ra',
+                'pending': 'Giao dịch đang xử lý'
+            };
+
+            showToast('Lọc', `Đã lọc: ${typeText[type]}`);
+        }
+
+        // Show Toast
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                showToast('Đăng xuất', 'Đang chuyển về trang chủ...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        // Format input amount
+        document.getElementById('withdrawAmount').addEventListener('input', function() {
+            if (this.value > 2150000) {
+                this.value = 2150000;
+                showToast('Thông báo', 'Số tiền rút tối đa là 2.150.000đ');
+            }
+        });
+
+        // Add animation on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeInUp 0.5s ease-out';
+                }
+            });
+        });
+
+        document.querySelectorAll('.balance-card, .method-card, .transaction-item').forEach(element => {
+            observer.observe(element);
+        });
+
+        // Add fadeInUp animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>

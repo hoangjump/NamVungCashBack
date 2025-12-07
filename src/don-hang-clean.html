@@ -1,0 +1,713 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đơn hàng của bạn - NamVung CashBack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%);
+            min-height: 100vh;
+            color: #111827;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3B82F6;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-balance {
+            background: #3B82F6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #111827;
+        }
+
+        /* Filter Tabs */
+        .filter-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 0.5rem;
+        }
+
+        .filter-tab {
+            padding: 0.75rem 1.5rem;
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .filter-tab:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        .filter-tab.active {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            color: white;
+        }
+
+        /* Order Grid */
+        .orders-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+
+        /* Order Card */
+        .order-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+        }
+
+        .order-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .order-header {
+            padding: 1rem 1.5rem;
+            background: #F9FAFB;
+            border-bottom: 1px solid #E5E7EB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .order-id {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .order-date {
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .order-status {
+            padding: 0.25rem 0.75rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .status-pending {
+            background: #FEF3C7;
+            color: #92400E;
+        }
+
+        .status-shipping {
+            background: #DBEAFE;
+            color: #1E40AF;
+        }
+
+        .status-completed {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+
+        /* Order Items */
+        .order-items {
+            padding: 1.5rem;
+        }
+
+        .order-item {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid #F3F4F6;
+        }
+
+        .order-item:last-child {
+            margin-bottom: 0;
+            padding-bottom: 0;
+            border-bottom: none;
+        }
+
+        .item-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 0.5rem;
+            object-fit: cover;
+            background: #F3F4F6;
+        }
+
+        .item-details {
+            flex: 1;
+        }
+
+        .item-name {
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.25rem;
+        }
+
+        .item-meta {
+            display: flex;
+            gap: 1rem;
+            color: #6B7280;
+            font-size: 0.875rem;
+        }
+
+        .item-price {
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .cashback {
+            color: #10B981;
+            font-weight: 500;
+        }
+
+        /* Order Footer */
+        .order-footer {
+            padding: 1rem 1.5rem;
+            background: #F9FAFB;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+
+        .order-total {
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .total-row {
+            font-size: 0.875rem;
+        }
+
+        .total-row strong {
+            color: #111827;
+        }
+
+        .order-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            font-size: 0.875rem;
+            border: none;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: #3B82F6;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #2563EB;
+        }
+
+        .btn-outline {
+            background: white;
+            color: #3B82F6;
+            border: 2px solid #3B82F6;
+        }
+
+        .btn-outline:hover {
+            background: #EFF6FF;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #10B981;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .filter-tabs {
+                gap: 0.5rem;
+            }
+
+            .filter-tab {
+                padding: 0.5rem 1rem;
+                font-size: 0.875rem;
+            }
+
+            .order-footer {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .order-total {
+                justify-content: space-between;
+            }
+
+            .order-actions {
+                width: 100%;
+            }
+
+            .order-actions .btn {
+                flex: 1;
+                justify-content: center;
+            }
+
+            .order-item {
+                flex-direction: column;
+            }
+
+            .item-image {
+                width: 100%;
+                height: 200px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="NamVung CashBack">
+                NamVung CashBack
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="tong-quan.html">Tổng Quan</a></li>
+                    <li><a href="don-hang.html" class="active">Đơn Hàng</a></li>
+                    <li><a href="san-pham.html">Sản Phẩm</a></li>
+                    <li><a href="so-du.html">Số Dư</a></li>
+                    <li><a href="ho-so.html">Hồ Sơ</a></li>
+                    <li><a href="tai-khoan.html">Tài Khoản</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-menu">
+                <span class="user-balance">2.150.000đ</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="section-title">Đơn hàng của bạn</h1>
+
+        <!-- Filter Tabs -->
+        <div class="filter-tabs">
+            <button class="filter-tab active" onclick="filterOrders('all')">Tất cả (24)</button>
+            <button class="filter-tab" onclick="filterOrders('pending')">Chờ xác nhận (3)</button>
+            <button class="filter-tab" onclick="filterOrders('shipping')">Đang giao (5)</button>
+            <button class="filter-tab" onclick="filterOrders('completed')">Hoàn thành (14)</button>
+            <button class="filter-tab" onclick="filterOrders('cancelled')">Đã hủy (2)</button>
+        </div>
+
+        <!-- Orders Grid -->
+        <div class="orders-grid">
+            <!-- Order 1 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">#DH001234</div>
+                        <div class="order-date">20/11/2024 14:30</div>
+                    </div>
+                    <span class="order-status status-pending">Chờ xác nhận</span>
+                </div>
+
+                <div class="order-items">
+                    <div class="order-item">
+                        <img src="https://images.unsplash.com/photo-1592286115803-a1c3b552ee43?w=80" alt="iPhone" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">iPhone 15 Pro Max 256GB</div>
+                            <div class="item-meta">
+                                <span>Shopee</span>
+                                <span>Số lượng: 1</span>
+                                <span class="cashback">Hoàn: 150.000đ</span>
+                            </div>
+                        </div>
+                        <div class="item-price">28.990.000đ</div>
+                    </div>
+
+                    <div class="order-item">
+                        <img src="https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=80" alt="AirPods" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">AirPods Pro 2</div>
+                            <div class="item-meta">
+                                <span>Shopee</span>
+                                <span>Số lượng: 1</span>
+                                <span class="cashback">Hoàn: 50.000đ</span>
+                            </div>
+                        </div>
+                        <div class="item-price">6.490.000đ</div>
+                    </div>
+                </div>
+
+                <div class="order-footer">
+                    <div class="order-total">
+                        <div class="total-row">
+                            <strong>Tổng:</strong> 35.480.000đ
+                        </div>
+                        <div class="total-row">
+                            <strong>Tiền hoàn:</strong> <span class="cashback">200.000đ</span>
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-outline">
+                            <i class="fas fa-eye"></i>
+                            Chi tiết
+                        </button>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-bell"></i>
+                            Hỗ trợ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order 2 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">#DH001233</div>
+                        <div class="order-date">19/11/2024 10:15</div>
+                    </div>
+                    <span class="order-status status-shipping">Đang giao</span>
+                </div>
+
+                <div class="order-items">
+                    <div class="order-item">
+                        <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=80" alt="MacBook" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">MacBook Air M2 13 inch</div>
+                            <div class="item-meta">
+                                <span>Tiki</span>
+                                <span>Số lượng: 1</span>
+                                <span class="cashback">Hoàn: 500.000đ</span>
+                            </div>
+                        </div>
+                        <div class="item-price">27.990.000đ</div>
+                    </div>
+                </div>
+
+                <div class="order-footer">
+                    <div class="order-total">
+                        <div class="total-row">
+                            <strong>Tổng:</strong> 27.990.000đ
+                        </div>
+                        <div class="total-row">
+                            <strong>Tiền hoàn:</strong> <span class="cashback">500.000đ</span>
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-outline">
+                            <i class="fas fa-map-marker-alt"></i>
+                            Theo dõi
+                        </button>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-phone"></i>
+                            Liên hệ
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Order 3 -->
+            <div class="order-card">
+                <div class="order-header">
+                    <div>
+                        <div class="order-id">#DH001232</div>
+                        <div class="order-date">18/11/2024 16:45</div>
+                    </div>
+                    <span class="order-status status-completed">Hoàn thành</span>
+                </div>
+
+                <div class="order-items">
+                    <div class="order-item">
+                        <img src="https://images.unsplash.com/photo-1592286115803-a1c3b552ee43?w=80" alt="iPhone" class="item-image">
+                        <div class="item-details">
+                            <div class="item-name">Samsung Galaxy S24 Ultra</div>
+                            <div class="item-meta">
+                                <span>Lazada</span>
+                                <span>Số lượng: 1</span>
+                                <span class="cashback">Hoàn: 300.000đ</span>
+                            </div>
+                        </div>
+                        <div class="item-price">25.990.000đ</div>
+                    </div>
+                </div>
+
+                <div class="order-footer">
+                    <div class="order-total">
+                        <div class="total-row">
+                            <strong>Tổng:</strong> 25.990.000đ
+                        </div>
+                        <div class="total-row">
+                            <strong>Tiền hoàn:</strong> <span class="cashback">300.000đ</span>
+                        </div>
+                    </div>
+                    <div class="order-actions">
+                        <button class="btn btn-outline">
+                            <i class="fas fa-star"></i>
+                            Đánh giá
+                        </button>
+                        <button class="btn btn-primary">
+                            <i class="fas fa-redo"></i>
+                            Mua lại
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <div>
+            <strong id="toast-title">Thành công!</strong>
+            <div id="toast-message">Thao tác đã được thực hiện</div>
+        </div>
+    </div>
+
+    <script>
+        // Filter Orders
+        function filterOrders(status) {
+            // Update active tab
+            document.querySelectorAll('.filter-tab').forEach(tab => {
+                tab.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // Show toast
+            showToast('Lọc đơn hàng', `Đã lọc: ${getStatusText(status)}`);
+        }
+
+        function getStatusText(status) {
+            const texts = {
+                'all': 'Tất cả đơn hàng',
+                'pending': 'Chờ xác nhận',
+                'shipping': 'Đang giao hàng',
+                'completed': 'Đã hoàn thành',
+                'cancelled': 'Đã hủy'
+            };
+            return texts[status] || 'Tất cả đơn hàng';
+        }
+
+        // Show Toast
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                showToast('Đăng xuất', 'Đang chuyển về trang chủ...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        // Order Actions
+        document.querySelectorAll('.order-actions .btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                const orderId = this.closest('.order-card').querySelector('.order-id').textContent;
+
+                if (this.textContent.includes('Chi tiết')) {
+                    showToast('Chi tiết đơn hàng', `Đang mở chi tiết ${orderId}...`);
+                } else if (this.textContent.includes('Hỗ trợ')) {
+                    showToast('Hỗ trợ', `Yêu cầu hỗ trợ ${orderId} đã được gửi!`);
+                } else if (this.textContent.includes('Theo dõi')) {
+                    showToast('Theo dõi', `Đang mở tracking ${orderId}...`);
+                } else if (this.textContent.includes('Liên hệ')) {
+                    showToast('Liên hệ', `Đang mở chat với shop...`);
+                } else if (this.textContent.includes('Đánh giá')) {
+                    showToast('Đánh giá', `Đang mở form đánh giá ${orderId}...`);
+                } else if (this.textContent.includes('Mua lại')) {
+                    showToast('Mua lại', 'Đang chuyển đến trang sản phẩm...');
+                }
+            });
+        });
+
+        // Add hover effect to cards
+        document.querySelectorAll('.order-card').forEach(card => {
+            card.addEventListener('mouseenter', function() {
+                this.style.transform = 'translateY(-4px)';
+            });
+
+            card.addEventListener('mouseleave', function() {
+                this.style.transform = 'translateY(-2px)';
+            });
+        });
+    </script>
+</body>
+</html>

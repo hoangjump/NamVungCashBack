@@ -1,0 +1,773 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sản phẩm - NamVung CashBack</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+            background: linear-gradient(135deg, #F0F9FF 0%, #E0F2FE 50%, #F0F9FF 100%);
+            min-height: 100vh;
+            color: #111827;
+        }
+
+        /* Header */
+        .header {
+            background: white;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: #111827;
+            font-weight: 600;
+            font-size: 1.25rem;
+        }
+
+        .logo img {
+            height: 40px;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+            margin: 0;
+            padding: 0;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #6B7280;
+            font-weight: 500;
+            transition: color 0.2s;
+        }
+
+        .nav-menu a:hover,
+        .nav-menu a.active {
+            color: #3B82F6;
+        }
+
+        .user-menu {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+        }
+
+        .user-balance {
+            background: #3B82F6;
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 0.5rem;
+            font-weight: 600;
+            font-size: 0.875rem;
+        }
+
+        .logout-btn {
+            background: none;
+            border: none;
+            color: #6B7280;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: color 0.2s;
+        }
+
+        .logout-btn:hover {
+            color: #EF4444;
+        }
+
+        /* Main Container */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 2rem;
+        }
+
+        /* Section Title */
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 2rem;
+            color: #111827;
+        }
+
+        /* Search and Filter */
+        .search-filter-section {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 1rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .search-bar {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .search-input {
+            flex: 1;
+            padding: 0.75rem 1rem;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            transition: border-color 0.2s;
+        }
+
+        .search-input:focus {
+            outline: none;
+            border-color: #3B82F6;
+        }
+
+        .search-btn {
+            padding: 0.75rem 1.5rem;
+            background: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .search-btn:hover {
+            background: #2563EB;
+        }
+
+        .filter-tags {
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-tag {
+            padding: 0.5rem 1rem;
+            background: #F3F4F6;
+            border: 2px solid transparent;
+            border-radius: 0.5rem;
+            font-size: 0.875rem;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .filter-tag:hover {
+            background: #E5E7EB;
+        }
+
+        .filter-tag.active {
+            background: white;
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        /* Product Grid */
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        /* Product Card */
+        .product-card {
+            background: white;
+            border-radius: 1rem;
+            overflow: hidden;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s, box-shadow 0.2s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .product-image {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+            background: #F3F4F6;
+        }
+
+        .product-info {
+            padding: 1rem;
+        }
+
+        .product-store {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .store-icon {
+            width: 20px;
+            height: 20px;
+            border-radius: 0.25rem;
+        }
+
+        .store-name {
+            font-size: 0.875rem;
+            color: #6B7280;
+        }
+
+        .product-name {
+            font-size: 1rem;
+            font-weight: 500;
+            color: #111827;
+            margin-bottom: 0.75rem;
+            line-height: 1.4;
+        }
+
+        .product-price-row {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .product-price {
+            font-size: 1.25rem;
+            font-weight: 600;
+            color: #111827;
+        }
+
+        .original-price {
+            font-size: 0.875rem;
+            color: #9CA3AF;
+            text-decoration: line-through;
+        }
+
+        .cashback-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.25rem;
+            background: #D1FAE5;
+            color: #065F46;
+            padding: 0.25rem 0.5rem;
+            border-radius: 0.25rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .buy-btn {
+            width: 100%;
+            padding: 0.75rem;
+            background: #3B82F6;
+            color: white;
+            border: none;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+
+        .buy-btn:hover {
+            background: #2563EB;
+        }
+
+        /* Pagination */
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 3rem;
+        }
+
+        .page-btn {
+            padding: 0.5rem 0.75rem;
+            background: white;
+            border: 2px solid #E5E7EB;
+            border-radius: 0.5rem;
+            font-weight: 500;
+            color: #6B7280;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .page-btn:hover {
+            border-color: #3B82F6;
+            color: #3B82F6;
+        }
+
+        .page-btn.active {
+            background: #3B82F6;
+            border-color: #3B82F6;
+            color: white;
+        }
+
+        /* Toast */
+        .toast {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            background: white;
+            padding: 1rem 1.5rem;
+            border-radius: 0.5rem;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+            display: none;
+            align-items: center;
+            gap: 1rem;
+            z-index: 1000;
+        }
+
+        .toast.show {
+            display: flex;
+            animation: slideIn 0.3s ease-out;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(100%);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .toast-icon {
+            font-size: 1.5rem;
+            color: #10B981;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .header-container {
+                padding: 1rem;
+            }
+
+            .nav-menu {
+                display: none;
+            }
+
+            .container {
+                padding: 1rem;
+            }
+
+            .search-bar {
+                flex-direction: column;
+            }
+
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+                gap: 1rem;
+            }
+
+            .product-image {
+                height: 160px;
+            }
+
+            .product-name {
+                font-size: 0.875rem;
+            }
+
+            .product-price {
+                font-size: 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="header-container">
+            <a href="index.html" class="logo">
+                <img src="img/logo.png" alt="NamVung CashBack">
+                NamVung CashBack
+            </a>
+
+            <nav>
+                <ul class="nav-menu">
+                    <li><a href="tong-quan.html">Tổng Quan</a></li>
+                    <li><a href="don-hang.html">Đơn Hàng</a></li>
+                    <li><a href="san-pham.html" class="active">Sản Phẩm</a></li>
+                    <li><a href="so-du.html">Số Dư</a></li>
+                    <li><a href="ho-so.html">Hồ Sơ</a></li>
+                    <li><a href="tai-khoan.html">Tài Khoản</a></li>
+                </ul>
+            </nav>
+
+            <div class="user-menu">
+                <span class="user-balance">2.150.000đ</span>
+                <button class="logout-btn" onclick="logout()">
+                    <i class="fas fa-sign-out-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="container">
+        <h1 class="section-title">Sản phẩm khuyến mãi</h1>
+
+        <!-- Search and Filter -->
+        <div class="search-filter-section">
+            <div class="search-bar">
+                <input type="text" class="search-input" placeholder="Tìm kiếm sản phẩm...">
+                <button class="search-btn">
+                    <i class="fas fa-search"></i> Tìm kiếm
+                </button>
+            </div>
+
+            <div class="filter-tags">
+                <button class="filter-tag active">Tất cả</button>
+                <button class="filter-tag">Điện thoại</button>
+                <button class="filter-tag">Laptop</button>
+                <button class="filter-tag">Tai nghe</button>
+                <button class="filter-tag">Đồng hồ</button>
+                <button class="filter-tag">Thời trang</button>
+                <button class="filter-tag">Mỹ phẩm</button>
+                <button class="filter-tag">Nhà cửa</button>
+            </div>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid">
+            <!-- Product 1 -->
+            <div class="product-card" onclick="viewProduct('iPhone 15 Pro')">
+                <img src="https://images.unsplash.com/photo-1592286115803-a1c3b552ee43?w=280" alt="iPhone 15 Pro" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=shopee.vn" alt="Shopee" class="store-icon">
+                        <span class="store-name">Shopee Mall</span>
+                    </div>
+                    <h3 class="product-name">iPhone 15 Pro Max 256GB Natural Titanium</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">28.990.000đ</span>
+                        <span class="original-price">32.990.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 150.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('iPhone 15 Pro')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 2 -->
+            <div class="product-card" onclick="viewProduct('MacBook Air')">
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=280" alt="MacBook Air" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=tiki.vn" alt="Tiki" class="store-icon">
+                        <span class="store-name">Tiki Trading</span>
+                    </div>
+                    <h3 class="product-name">MacBook Air M2 13 inch 8GB 256GB</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">27.990.000đ</span>
+                        <span class="original-price">31.990.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 500.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('MacBook Air')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 3 -->
+            <div class="product-card" onclick="viewProduct('AirPods Pro')">
+                <img src="https://images.unsplash.com/photo-1588423771073-b8903fbb85b5?w=280" alt="AirPods Pro" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=lazada.vn" alt="Lazada" class="store-icon">
+                        <span class="store-name">LazMall</span>
+                    </div>
+                    <h3 class="product-name">AirPods Pro 2 with MagSafe Case</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">6.490.000đ</span>
+                        <span class="original-price">7.490.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 50.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('AirPods Pro')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 4 -->
+            <div class="product-card" onclick="viewProduct('Samsung Galaxy')">
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=280" alt="Samsung Galaxy" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=shopee.vn" alt="Shopee" class="store-icon">
+                        <span class="store-name">Shopee Mall</span>
+                    </div>
+                    <h3 class="product-name">Samsung Galaxy S24 Ultra 5G 256GB</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">25.990.000đ</span>
+                        <span class="original-price">29.990.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 300.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('Samsung Galaxy')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 5 -->
+            <div class="product-card" onclick="viewProduct('iPad Pro')">
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=280" alt="iPad Pro" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=tiki.vn" alt="Tiki" class="store-icon">
+                        <span class="store-name">Tiki Trading</span>
+                    </div>
+                    <h3 class="product-name">iPad Pro M2 11 inch Wi-Fi 128GB</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">18.990.000đ</span>
+                        <span class="original-price">21.990.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 200.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('iPad Pro')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 6 -->
+            <div class="product-card" onclick="viewProduct('Apple Watch')">
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=280" alt="Apple Watch" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=lazada.vn" alt="Lazada" class="store-icon">
+                        <span class="store-name">LazMall</span>
+                    </div>
+                    <h3 class="product-name">Apple Watch Series 9 GPS 45mm</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">11.990.000đ</span>
+                        <span class="original-price">13.990.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 100.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('Apple Watch')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 7 -->
+            <div class="product-card" onclick="viewProduct('Sony WH-1000XM5')">
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=280" alt="Sony Headphones" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=shopee.vn" alt="Shopee" class="store-icon">
+                        <span class="store-name">Shopee Mall</span>
+                    </div>
+                    <h3 class="product-name">Sony WH-1000XM5 Wireless Headphones</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">7.990.000đ</span>
+                        <span class="original-price">9.990.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 80.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('Sony WH-1000XM5')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+
+            <!-- Product 8 -->
+            <div class="product-card" onclick="viewProduct('Magic Mouse')">
+                <img src="https://images.unsplash.com/photo-1592750475338-74b7b21085ab?w=280" alt="Magic Mouse" class="product-image">
+                <div class="product-info">
+                    <div class="product-store">
+                        <img src="https://www.google.com/s2/favicons?domain=tiki.vn" alt="Tiki" class="store-icon">
+                        <span class="store-name">Apple Official Store</span>
+                    </div>
+                    <h3 class="product-name">Magic Mouse Multi-Touch Surface</h3>
+                    <div class="product-price-row">
+                        <span class="product-price">2.990.000đ</span>
+                        <span class="original-price">3.490.000đ</span>
+                    </div>
+                    <div class="cashback-badge">
+                        <i class="fas fa-coins"></i>
+                        Hoàn 30.000đ
+                    </div>
+                    <button class="buy-btn" onclick="event.stopPropagation(); buyNow('Magic Mouse')">
+                        Mua ngay
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Pagination -->
+        <div class="pagination">
+            <button class="page-btn">
+                <i class="fas fa-chevron-left"></i>
+            </button>
+            <button class="page-btn active">1</button>
+            <button class="page-btn">2</button>
+            <button class="page-btn">3</button>
+            <button class="page-btn">4</button>
+            <button class="page-btn">5</button>
+            <button class="page-btn">
+                <i class="fas fa-chevron-right"></i>
+            </button>
+        </div>
+    </main>
+
+    <!-- Toast -->
+    <div id="toast" class="toast">
+        <i class="fas fa-check-circle toast-icon"></i>
+        <div>
+            <strong id="toast-title">Thành công!</strong>
+            <div id="toast-message">Thao tác đã được thực hiện</div>
+        </div>
+    </div>
+
+    <script>
+        // Filter Products
+        document.querySelectorAll('.filter-tag').forEach(tag => {
+            tag.addEventListener('click', function() {
+                document.querySelectorAll('.filter-tag').forEach(t => t.classList.remove('active'));
+                this.classList.add('active');
+                showToast('Lọc sản phẩm', `Đã lọc: ${this.textContent}`);
+            });
+        });
+
+        // View Product
+        function viewProduct(productName) {
+            showToast('Xem sản phẩm', `Đang mở: ${productName}`);
+        }
+
+        // Buy Now
+        function buyNow(productName) {
+            showToast('Mua ngay', `Đã thêm ${productName} vào giỏ hàng`);
+        }
+
+        // Search
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchValue = document.querySelector('.search-input').value;
+            if (searchValue) {
+                showToast('Tìm kiếm', `Đang tìm kiếm: ${searchValue}`);
+            }
+        });
+
+        // Search on Enter
+        document.querySelector('.search-input').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+
+        // Pagination
+        document.querySelectorAll('.page-btn').forEach(btn => {
+            btn.addEventListener('click', function() {
+                if (!this.querySelector('.fa-chevron') && !this.classList.contains('active')) {
+                    document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+                    this.classList.add('active');
+                    showToast('Phân trang', `Đã chuyển đến trang ${this.textContent}`);
+                }
+            });
+        });
+
+        // Show Toast
+        function showToast(title, message) {
+            const toast = document.getElementById('toast');
+            document.getElementById('toast-title').textContent = title;
+            document.getElementById('toast-message').textContent = message;
+
+            toast.classList.add('show');
+
+            setTimeout(() => {
+                toast.classList.remove('show');
+            }, 3000);
+        }
+
+        // Logout
+        function logout() {
+            if (confirm('Bạn có chắc muốn đăng xuất?')) {
+                showToast('Đăng xuất', 'Đang chuyển về trang chủ...');
+                setTimeout(() => {
+                    window.location.href = 'index.html';
+                }, 1000);
+            }
+        }
+
+        // Add animation to products on scroll
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animation = 'fadeIn 0.5s ease-out';
+                }
+            });
+        });
+
+        document.querySelectorAll('.product-card').forEach(card => {
+            observer.observe(card);
+        });
+
+        // Add fadeIn animation
+        const style = document.createElement('style');
+        style.textContent = `
+            @keyframes fadeIn {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+</body>
+</html>
