@@ -322,10 +322,35 @@ a:hover {
 .hotline {
     display: flex;
     align-items: center;
-    gap: var(--spacing-xs);
-    color: var(--text-secondary);
-    font-weight: 500;
-    white-space: nowrap;
+    gap: var(--spacing-sm);
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: rgba(249, 115, 22, 0.05);
+    border: 1px solid rgba(249, 115, 22, 0.2);
+    border-radius: var(--radius-lg);
+    transition: all var(--transition-base);
+}
+
+.hotline:hover {
+    background: rgba(249, 115, 22, 0.1);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.hotline i {
+    color: var(--color-primary);
+    font-size: 1.1rem;
+}
+
+.hotline a {
+    color: var(--text-primary);
+    font-weight: 600;
+    text-decoration: none;
+    font-size: 0.95rem;
+    transition: color var(--transition-fast);
+}
+
+.hotline:hover a {
+    color: var(--color-primary);
 }
 
 .mobile-menu-toggle {
@@ -1745,7 +1770,11 @@ a:hover {
 
     .hotline {
         font-size: 0.875rem;
-        display: none;
+        padding: var(--spacing-xs) var(--spacing-sm);
+    }
+
+    .hotline a {
+        font-size: 0.8rem;
     }
 
     .features-grid {
