@@ -31,29 +31,27 @@
     <!-- Header -->
     <header class="header">
         <div class="container">
-            <div class="header-content">
+            <div class="header-top">
                 <a href="./index.html" class="logo">
-                    <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack" width="160" height="45">
+                    <img src="https://i.ibb.co/6y2kF0r/namvung-logo.png" alt="NamVung CashBack" width="140" height="40">
                 </a>
 
-                <nav class="main-nav">
-                    <a href="#" class="nav-link">Cửa hàng</a>
-                    <a href="#" class="nav-link">Khuyến mãi</a>
-                    <a href="#" class="nav-link">Về chúng tôi</a>
-                    <a href="#" class="nav-link">Hỗ trợ</a>
-                </nav>
+                <!-- Search Bar -->
+                <div class="search-container">
+                    <input type="text" class="search-input" placeholder="Tìm cửa hàng...">
+                    <button class="search-btn">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
 
                 <div class="header-right">
                     <div class="hotline">
                         <i class="fas fa-phone-alt"></i>
-                        <a href="tel:19000000">1900 0000</a>
+                        <span>1900 0000</span>
                     </div>
                     <div class="header-actions">
                         <button class="btn btn-outline" onclick="mockLogin()">Đăng nhập</button>
-                        <button class="btn btn-primary" onclick="mockLogin()">
-                            Đăng ký
-                            <i class="fas fa-arrow-right"></i>
-                        </button>
+                        <button class="btn btn-primary" onclick="mockLogin()">Đăng ký</button>
                     </div>
                 </div>
 
@@ -61,6 +59,18 @@
                     <i class="fas fa-bars"></i>
                 </button>
             </div>
+
+            <!-- Navigation Menu -->
+            <nav class="header-nav">
+                <button class="nav-categories">
+                    <i class="fas fa-bars"></i>
+                    <span>Danh Mục</span>
+                </button>
+                <a href="#" class="nav-link">Sàn thương mại điện tử</a>
+                <a href="#" class="nav-link">Mã giảm giá</a>
+                <a href="#" class="nav-link">Về chúng tôi</a>
+                <a href="#" class="nav-link">Hỗ trợ</a>
+            </nav>
         </div>
     </header>
 
@@ -207,48 +217,70 @@
         </div>
     </section>
 
-    <!-- Popular Stores -->
+    <!-- Popular Stores - GoShopBack Style -->
     <section class="popular-stores">
         <div class="container">
-            <div class="section-header">
-                <h2>Cửa Hàng Phổ Biến</h2>
-                <p>Những cửa hàng được yêu thích nhất trên NamVung CashBack</p>
+            <div class="section-header-inline">
+                <div>
+                    <h2>Cửa hàng nổi bật</h2>
+                    <p>Nhận hoàn tiền khi mua sắm</p>
+                </div>
+                <a href="#" class="see-more">Xem thêm <i class="fas fa-arrow-right"></i></a>
             </div>
 
-            <div class="stores-carousel">
-                <div class="store-card" data-store="shopee">
-                    <div class="store-image">
-                        <div style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #EE4D2D 0%, #FF6347 100%); border-radius: 16px;">
-                            <i class="fas fa-shopping-bag" style="font-size: 36px; color: white;"></i>
+            <div class="stores-grid-horizontal">
+                <div class="store-card-horizontal">
+                    <div class="store-badge">↑ Hoàn Tiền</div>
+                    <div class="store-logo-box">
+                        <div style="width: 100%; height: 80px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #EE4D2D 0%, #FF6347 100%); border-radius: 12px;">
+                            <i class="fas fa-shopping-bag" style="font-size: 32px; color: white;"></i>
                         </div>
                     </div>
-                    <div class="store-info">
-                        <h3>Shopee</h3>
-                        <p class="cashback-rate">Hoàn tiền <span>Lên đến 15%</span></p>
+                    <div class="store-details">
+                        <h3 class="store-name">Shopee</h3>
+                        <p class="store-cashback">Hoàn tiền <strong>đến 15%</strong></p>
+                        <p class="store-category">Thương mại điện tử</p>
                     </div>
                 </div>
 
-                <div class="store-card" data-store="lazada">
-                    <div class="store-image">
-                        <div style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0F1E7C 0%, #1F3AB2 100%); border-radius: 16px;">
-                            <i class="fas fa-store" style="font-size: 36px; color: white;"></i>
+                <div class="store-card-horizontal">
+                    <div class="store-badge">↑ Hoàn Tiền</div>
+                    <div class="store-logo-box">
+                        <div style="width: 100%; height: 80px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #0F1E7C 0%, #1F3AB2 100%); border-radius: 12px;">
+                            <i class="fas fa-store" style="font-size: 32px; color: white;"></i>
                         </div>
                     </div>
-                    <div class="store-info">
-                        <h3>Lazada</h3>
-                        <p class="cashback-rate">Hoàn tiền <span>Lên đến 10%</span></p>
+                    <div class="store-details">
+                        <h3 class="store-name">Lazada</h3>
+                        <p class="store-cashback">Hoàn tiền <strong>đến 10%</strong></p>
+                        <p class="store-category">Thương mại điện tử</p>
                     </div>
                 </div>
 
-                <div class="store-card" data-store="tiktokshop">
-                    <div class="store-image">
-                        <div style="width: 80px; height: 80px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #000000 0%, #333333 100%); border-radius: 16px;">
-                            <i class="fab fa-tiktok" style="font-size: 36px; color: white;"></i>
+                <div class="store-card-horizontal">
+                    <div class="store-badge">↑ Hoàn Tiền</div>
+                    <div class="store-logo-box">
+                        <div style="width: 100%; height: 80px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #000000 0%, #333333 100%); border-radius: 12px;">
+                            <i class="fab fa-tiktok" style="font-size: 32px; color: white;"></i>
                         </div>
                     </div>
-                    <div class="store-info">
-                        <h3>TikTok Shop</h3>
-                        <p class="cashback-rate">Hoàn tiền <span>Lên đến 12%</span></p>
+                    <div class="store-details">
+                        <h3 class="store-name">TikTok Shop</h3>
+                        <p class="store-cashback">Hoàn tiền <strong>đến 12%</strong></p>
+                        <p class="store-category">Thương mại điện tử</p>
+                    </div>
+                </div>
+
+                <div class="store-card-horizontal">
+                    <div class="store-logo-box">
+                        <div style="width: 100%; height: 80px; display: flex; align-items: center; justify-content: center; background: linear-gradient(135deg, #10B981 0%, #059669 100%); border-radius: 12px;">
+                            <i class="fas fa-tags" style="font-size: 32px; color: white;"></i>
+                        </div>
+                    </div>
+                    <div class="store-details">
+                        <h3 class="store-name">Mã giảm giá</h3>
+                        <p class="store-cashback">Voucher HOT</p>
+                        <p class="store-category">Khuyến mãi</p>
                     </div>
                 </div>
             </div>
